@@ -14,19 +14,19 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
-
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -45,6 +45,7 @@ import com.pathplanner.lib.path.PathPlannerPath;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final IntakeSubsystem m_Intake = new IntakeSubsystem();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -56,6 +57,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
     // Configure the button bindings
     configureButtonBindings();
 
@@ -63,6 +65,7 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Chooser",autoChooser);
     
+    //m_Intake = new IntakeSubsystem();
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -75,6 +78,10 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
                 true, true),
             m_robotDrive));
+
+    // Intake 
+    m_Intake.setDefaultCommand(m_Intake.StopIntakeCommand());
+
   }
 
   /**
@@ -86,11 +93,18 @@ public class RobotContainer {
    * passing it to a
    * {@link JoystickButton}.
    */
+
+
   private void configureButtonBindings() {
+    // Swerve
     new JoystickButton(m_driverController, Button.kR1.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+
+    // Intake
+    new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)
+      .whileHeld(new RunIntakeCommand(0.4)); // Run intake motor at 40% power while button held (adjust intake speed here)
   }
 
   /**

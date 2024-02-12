@@ -102,9 +102,14 @@ public class RobotContainer {
             () -> m_robotDrive.setX(),
             m_robotDrive));
 
-    // Intake
+  // Intake FORWARD
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)
-      .onTrue(m_Intake.RunIntakeCommand(0.4)); // Run intake motor at 40% power while button held (adjust intake speed here)
+      .onTrue(m_Intake.RunIntakeCommand(0.4)); // Run intake motor FORWARD at 40% power while button held (adjust intake speed here)
+  
+
+  // Intake REVERSE
+     new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value)
+      .onTrue(m_Intake.RunIntakeCommand(-0.4)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
   }
 
   /**

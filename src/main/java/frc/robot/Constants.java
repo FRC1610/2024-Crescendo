@@ -118,8 +118,27 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kDriverOperatorPort = 1;
+    public static final int kOperatorControllerPort = 1;
     public static final double kDriveDeadband = 0.05;
+  }
+
+
+  // INTAKE
+  public static final class IntakeConstants {
+    public static final IdleMode kIntakeMotorIdleMode = IdleMode.kBrake;
+    public static final int kIntakeMotorCurrentLimit = 20; // amps
+  }
+
+  // ARM
+  public static final class ArmConstants {
+    public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
+    public static final int kArmMotorCurrentLimit = 50; // amps
+  }
+
+  // LAUNCHER 
+  public static final class LauncherConstants {
+    public static final IdleMode kLauncherMotorIdleMode = IdleMode.kCoast;
+    public static final int kLauncherMotorCurrentLimit = 50; // amps
   }
 
   public static final class AutoConstants {

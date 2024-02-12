@@ -15,6 +15,8 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+//import edu.wpi.first.wpilibj.PS4Controller;
+//import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AutoConstants;
@@ -97,7 +99,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     // Swerve
-    new JoystickButton(m_driverController, Button.kR1.value)
+    new JoystickButton(m_driverController, XboxController.Button.kStart.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));

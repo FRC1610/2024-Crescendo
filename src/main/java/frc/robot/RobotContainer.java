@@ -104,7 +104,7 @@ public class RobotContainer {
 
     // Intake
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)
-      .whileHeld(new RunIntakeCommand(0.4)); // Run intake motor at 40% power while button held (adjust intake speed here)
+      .onTrue(m_Intake.RunIntakeCommand(0.4)); // Run intake motor at 40% power while button held (adjust intake speed here)
   }
 
   /**

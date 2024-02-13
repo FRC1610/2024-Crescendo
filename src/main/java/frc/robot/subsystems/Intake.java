@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
 
-public class IntakeSubsystem extends SubsystemBase {
+public class Intake extends SubsystemBase {
     private final CANSparkMax m_IntakeMotor;
     private final CANSparkMax m_IntakeFollower1;
     private final CANSparkMax m_IntakeFollower2;
 
-    public IntakeSubsystem() {
+    public Intake() {
         // Spark Max Sextup
         m_IntakeMotor = new CANSparkMax(4, MotorType.kBrushless);
         m_IntakeMotor.restoreFactoryDefaults();

@@ -22,8 +22,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -47,7 +48,8 @@ import com.pathplanner.lib.path.PathPlannerPath;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  private final IntakeSubsystem m_Intake = new IntakeSubsystem();
+  private final Intake m_Intake = new Intake();
+  private final Arm m_Arm = new Arm();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -110,8 +112,23 @@ public class RobotContainer {
   
 
   // Intake REVERSE
-     new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value)
+    new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value)
       .onTrue(m_Intake.RunIntakeCommand(-0.4)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
+
+
+  //Arm Speaker Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kA.value)
+      .onTrue(m_Arm.SetPositionCommand(3.0)); //Real position to be determined 
+
+  //Arm Sub Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kB.value)
+      .onTrue(m_Arm.SetPositionCommand(2.0)); //Real position to be determined
+
+  //Arm Down Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kX.value)
+      .onTrue(m_Arm.SetPositionCommand(1.0)); //Real position to be determined
+
+
   }
 
   /**

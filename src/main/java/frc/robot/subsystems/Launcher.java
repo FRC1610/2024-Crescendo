@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LauncherConstants;
 
 
-public class LauncherSubsystem extends SubsystemBase {
+public class Launcher extends SubsystemBase {
     private final CANSparkMax m_LauncherMotor;
     private final CANSparkMax m_LauncherFollower;
 
-    public LauncherSubsystem() {
+    public Launcher() {
         // Spark Max Sextup
         m_LauncherMotor = new CANSparkMax(8, MotorType.kBrushless);
         m_LauncherMotor.restoreFactoryDefaults();

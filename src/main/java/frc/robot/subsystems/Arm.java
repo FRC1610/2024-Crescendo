@@ -26,8 +26,8 @@ public class Arm extends SubsystemBase {
         m_ArmMotor.setSmartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
         
         m_ArmEncoder = m_ArmMotor.getAbsoluteEncoder(Type.kDutyCycle);
-        
         m_ArmPID = m_ArmMotor.getPIDController();
+        m_ArmPID.setFeedbackDevice(m_ArmEncoder);
 
         m_ArmFollower = new CANSparkMax(3, MotorType.kBrushless);
         m_ArmFollower.restoreFactoryDefaults();
@@ -49,5 +49,10 @@ public class Arm extends SubsystemBase {
 
     public Command SetPositionCommand(double targetPosition){
         return this.startEnd(() -> this.setPosition(targetPosition), () ->{});
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Arm Position", m_ArmEncoder.getPosition());
     }
 }

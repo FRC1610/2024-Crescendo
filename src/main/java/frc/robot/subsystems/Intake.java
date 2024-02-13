@@ -53,9 +53,9 @@ public Command RunIntakeCommand(double IntakeSpeed) {
     return this.run(() -> this.RunIntake(IntakeSpeed));
 }
 
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("IntakeCurrent", m_IntakeMotor.getOutputCurrent());
-    }
+@Override
+public void periodic() {
+    SmartDashboard.putNumber("IntakeCurrent", m_IntakeMotor.getOutputCurrent());
+}
 
 }

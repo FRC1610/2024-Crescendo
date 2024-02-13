@@ -45,9 +45,9 @@ public Command RunLauncherCommand(double IntakeSpeed) {
     return this.run(() -> this.RunLauncher(IntakeSpeed));
 }
 
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("LauncherCurrent", m_LauncherMotor.getOutputCurrent());
-    }
+@Override
+public void periodic() {
+    SmartDashboard.putNumber("LauncherCurrent", m_LauncherMotor.getOutputCurrent());
+}
 
 }

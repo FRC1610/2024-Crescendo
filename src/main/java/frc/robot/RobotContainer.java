@@ -25,6 +25,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Launcher;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -53,6 +54,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Intake m_Intake = new Intake();
   private final Arm m_Arm = new Arm();
+  private final Launcher m_Launcher = new Launcher();
 
   //private final SendableChooser<Command> autoChooser;
 
@@ -71,8 +73,6 @@ public class RobotContainer {
     //autoChooser = AutoBuilder.buildAutoChooser();
 
     //SmartDashboard.putData("Auto Chooser",autoChooser);
-    
-    //m_Intake = new IntakeSubsystem();
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -86,8 +86,11 @@ public class RobotContainer {
                 true, true),
             m_robotDrive));
 
-    // Intake 
+    // Intake
     m_Intake.setDefaultCommand(m_Intake.StopIntakeCommand());
+
+    // Launcher
+    m_Launcher.setDefaultCommand(m_Launcher.StopLauncherCommand());
 
   }
 
@@ -111,11 +114,20 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value)
-      .whileTrue(m_Intake.RunIntakeCommand(0.75)); // Run intake motor FORWARD at 40% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(0.75)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value)
-      .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 75% power while button held (adjust intake speed here)
+
+  // Launcher Podium Speed
+    new JoystickButton(m_OperatorController, Button.kA.value)
+      .whileTrue(m_Launcher.RunLauncherCommand(0.5)); // Run launcher at 50% power while button held (adjust launcher speed here)
+
+  // Launcher Wing Speed
+    new JoystickButton(m_OperatorController, Button.kB.value)
+      .whileTrue(m_Launcher.RunLauncherCommand(0.6)); // Run launcher at 60% power while button held (adjust launcher speed here)
+
 
   /*
   //Arm Speaker Position

@@ -139,6 +139,7 @@ public final class Constants {
   public static final class LauncherConstants {
     public static final IdleMode kLauncherMotorIdleMode = IdleMode.kCoast;
     public static final int kLauncherMotorCurrentLimit = 50; // amps
+    public static final double kLauncherRampRate = 0.5; //seconds
   }
 
   public static final class AutoConstants {

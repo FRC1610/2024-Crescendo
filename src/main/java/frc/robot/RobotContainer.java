@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
+
 import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -27,6 +29,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -113,20 +116,22 @@ public class RobotContainer {
             m_robotDrive));
 
   // Intake FORWARD
-    new JoystickButton(m_OperatorController, Button.kRightBumper.value)
+    new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
       .whileTrue(m_Intake.RunIntakeCommand(0.75)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
 
   // Intake REVERSE
-    new JoystickButton(m_OperatorController, Button.kLeftBumper.value)
+    new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
       .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 75% power while button held (adjust intake speed here)
 
-  // Launcher Podium Speed
-    new JoystickButton(m_OperatorController, Button.kA.value)
+  // Launcher Subwoofer Speed
+    new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
       .whileTrue(m_Launcher.RunLauncherCommand(0.5)); // Run launcher at 50% power while button held (adjust launcher speed here)
+      // This would be a good spot to add a command for the arm setpoint and change this to a toggle
+      // Press the button once to move to setpoint and run the flywheels, press again to release (or press another button)
 
   // Launcher Wing Speed
-    new JoystickButton(m_OperatorController, Button.kB.value)
-      .whileTrue(m_Launcher.RunLauncherCommand(0.6)); // Run launcher at 60% power while button held (adjust launcher speed here)
+    new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
+      .whileTrue((m_Launcher.RunLauncherCommand(0.6))); // Run launcher at 60% power while button held (adjust launcher speed here)
 
 
   /*

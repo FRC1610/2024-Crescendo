@@ -111,11 +111,11 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value)
-      .whileTrue(m_Intake.RunIntakeCommand(0.4)); // Run intake motor FORWARD at 40% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(0.35)); // Run intake motor FORWARD at 40% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value)
-      .whileTrue(m_Intake.RunIntakeCommand(-0.4)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(-0.35)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
 
   /*
   //Arm Speaker Position

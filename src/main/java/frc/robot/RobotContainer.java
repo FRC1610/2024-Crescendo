@@ -5,35 +5,41 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+//import edu.wpi.first.math.controller.PIDController;
+//import edu.wpi.first.math.controller.ProfiledPIDController;
+//import edu.wpi.first.math.geometry.Pose2d;
+//import edu.wpi.first.math.geometry.Rotation2d;
+//import edu.wpi.first.math.geometry.Translation2d;
+//import edu.wpi.first.math.trajectory.Trajectory;
+//import edu.wpi.first.math.trajectory.TrajectoryConfig;
+//import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.XboxController.Button;
+//import edu.wpi.first.wpilibj.PS4Controller;
+//import edu.wpi.first.wpilibj.PS4Controller.Button;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
+//import frc.robot.Constants.AutoConstants;
+//import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import java.util.List;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+//import java.util.List;
 
-
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.GoalEndState;
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
+//import com.pathplanner.lib.auto.AutoBuilder;
+//import com.pathplanner.lib.auto.NamedCommands;
+//import com.pathplanner.lib.commands.PathPlannerAuto;
+//import com.pathplanner.lib.path.GoalEndState;
+//import com.pathplanner.lib.path.PathConstraints;
+//import com.pathplanner.lib.path.PathPlannerPath;
  
 
 /*
@@ -45,23 +51,28 @@ import com.pathplanner.lib.path.PathPlannerPath;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final Intake m_Intake = new Intake();
+  private final Arm m_Arm = new Arm();
 
-  private final SendableChooser<Command> autoChooser;
+  //private final SendableChooser<Command> autoChooser;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
-
+  // Operator Controller
+  XboxController m_OperatorController = new XboxController(OIConstants.kOperatorControllerPort);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
     // Configure the button bindings
     configureButtonBindings();
 
-    autoChooser = AutoBuilder.buildAutoChooser();
+    //autoChooser = AutoBuilder.buildAutoChooser();
 
-    SmartDashboard.putData("Auto Chooser",autoChooser);
+    //SmartDashboard.putData("Auto Chooser",autoChooser);
     
+    //m_Intake = new IntakeSubsystem();
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -74,6 +85,10 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
                 true, true),
             m_robotDrive));
+
+    // Intake 
+    m_Intake.setDefaultCommand(m_Intake.StopIntakeCommand());
+
   }
 
   /**
@@ -85,11 +100,37 @@ public class RobotContainer {
    * passing it to a
    * {@link JoystickButton}.
    */
+
+
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
+  // Swerve
+    new JoystickButton(m_driverController, Button.kStart.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
             m_robotDrive));
+
+  // Intake FORWARD
+    new JoystickButton(m_OperatorController, Button.kRightBumper.value)
+      .whileTrue(m_Intake.RunIntakeCommand(0.75)); // Run intake motor FORWARD at 40% power while button held (adjust intake speed here)
+
+  // Intake REVERSE
+    new JoystickButton(m_OperatorController, Button.kLeftBumper.value)
+      .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
+
+  /*
+  //Arm Speaker Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kA.value)
+      .onTrue(m_Arm.SetPositionCommand(3.0)); //Real position to be determined 
+
+  //Arm Sub Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kB.value)
+      .onTrue(m_Arm.SetPositionCommand(2.0)); //Real position to be determined
+
+  //Arm Down Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kX.value)
+      .onTrue(m_Arm.SetPositionCommand(1.0)); //Real position to be determined
+  */
+
   }
 
   /**
@@ -97,9 +138,12 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /*
+  
+   public Command getAutonomousCommand() {
 
     return autoChooser.getSelected();
     
   }
+  */
 }

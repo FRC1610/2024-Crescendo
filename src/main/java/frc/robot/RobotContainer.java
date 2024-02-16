@@ -137,7 +137,7 @@ public class RobotContainer {
 
   // Launcher WING Speed
     new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X
-      .whileTrue((m_Launcher.RunLauncherCommand(0.75))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherRPMCommand(1000))); // Run launcher at 1000 RPM while button held (adjust launcher speed here)
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper

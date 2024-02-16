@@ -29,8 +29,6 @@ public class Launcher extends SubsystemBase {
         m_LauncherFollower.setOpenLoopRampRate(LauncherConstants.kLauncherRampRate);
         m_LauncherFollower.follow(m_LauncherMotor, true);
         m_LauncherFollower.burnFlash();
-
-
     }
 
 private void StopLauncher() {
@@ -68,6 +66,7 @@ public Command RunLauncherRPMCommand(double LauncherRPM) {
 @Override
 public void periodic() {
     SmartDashboard.putNumber("LauncherCurrent", m_LauncherMotor.getOutputCurrent());
+    SmartDashboard.putNumber("LauncherRPM", m_LauncherMotor.getEncoder().getVelocity());
 }
 
 }

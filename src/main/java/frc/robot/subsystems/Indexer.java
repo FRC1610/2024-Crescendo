@@ -20,7 +20,6 @@ public class Indexer extends SubsystemBase {
         m_IndexerMotor.setIdleMode(IndexerConstants.kIndexerMotorIdleMode);
         m_IndexerMotor.setSmartCurrentLimit(IndexerConstants.kIndexerMotorCurrentLimit);
         m_IndexerMotor.burnFlash();
-
     }
 
 private void StopIndexer() {

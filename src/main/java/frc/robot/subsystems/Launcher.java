@@ -34,8 +34,8 @@ private void StopLauncher() {
     m_LauncherMotor.set(0.0); // Stop launcher motors
 }
 
-private void RunLauncher(double IntakeSpeed) {
-    m_LauncherMotor.set(IntakeSpeed); // Run launcher motors
+private void RunLauncher(double LauncherSpeed) {
+    m_LauncherMotor.set(LauncherSpeed); // Run launcher motors
 }
 
 public Command StopLauncherCommand() {

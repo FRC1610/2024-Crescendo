@@ -97,6 +97,9 @@ public class RobotContainer {
     // Launcher
     m_Launcher.setDefaultCommand(m_Launcher.StopLauncherCommand());
 
+    // Indexer
+    m_Indexer.setDefaultCommand(m_Indexer.StopIndexerCommand());
+
   }
 
   /**
@@ -127,13 +130,13 @@ public class RobotContainer {
 
   // Launcher SUBWOOFER Speed
     new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
-      .whileTrue(m_Launcher.RunLauncherCommand(0.5)); // Run launcher at 50% power while button held (adjust launcher speed here)
+      .whileTrue(m_Launcher.RunLauncherCommand(0.70, 0.70)); // Run launcher at 50% power while button held (adjust launcher speed here)
       // This would be a good spot to add a command for the arm setpoint and change this to a toggle
       // Press the button once to move to setpoint and run the flywheels, press again to release (or press another button)
 
   // Launcher PODIUM Speed
     new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
-      .whileTrue((m_Launcher.RunLauncherCommand(0.60))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherCommand(0.80, 0.80))); // Run launcher at 60% power while button held (adjust launcher speed here)
 
   // Launcher WING Speed
     new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X

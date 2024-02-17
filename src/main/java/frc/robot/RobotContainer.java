@@ -122,7 +122,7 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
-      .whileTrue(m_Intake.RunIntakeCommand(0.75)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
@@ -144,7 +144,7 @@ public class RobotContainer {
 
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
-      .whileTrue((m_Launcher.RunLauncherCommand(0.50, 0.50))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
     
 
   // Run Indexer

@@ -16,24 +16,24 @@ public class Intake extends SubsystemBase {
     public Intake() {
         // Spark Max Sextup
         m_IntakeMotor = new CANSparkMax(4, MotorType.kBrushless);
-        m_IntakeMotor.restoreFactoryDefaults();
+        //m_IntakeMotor.restoreFactoryDefaults();
         m_IntakeMotor.setIdleMode(IntakeConstants.kIntakeMotorIdleMode);
         m_IntakeMotor.setSmartCurrentLimit(IntakeConstants.kIntakeMotorCurrentLimit);
-        m_IntakeMotor.burnFlash();
+        //m_IntakeMotor.burnFlash();
 
         m_IntakeFollower1 = new CANSparkMax(5, MotorType.kBrushless);
-        m_IntakeFollower1.restoreFactoryDefaults();
+        //m_IntakeFollower1.restoreFactoryDefaults();
         m_IntakeFollower1.setIdleMode(IntakeConstants.kIntakeMotorIdleMode);
         m_IntakeFollower1.setSmartCurrentLimit(IntakeConstants.kIntakeMotorCurrentLimit);
         m_IntakeFollower1.follow(m_IntakeMotor, true);
-        m_IntakeFollower1.burnFlash();
+        //m_IntakeFollower1.burnFlash();
 
         m_IntakeFollower2 = new CANSparkMax(6, MotorType.kBrushless);
-        m_IntakeFollower2.restoreFactoryDefaults();
+        //m_IntakeFollower2.restoreFactoryDefaults();
         m_IntakeFollower2.setIdleMode(IntakeConstants.kIntakeMotorIdleMode);
         m_IntakeFollower2.setSmartCurrentLimit(IntakeConstants.kIntakeMotorCurrentLimit);
         m_IntakeFollower2.follow(m_IntakeMotor, true);
-        m_IntakeFollower2.burnFlash();
+        //m_IntakeFollower2.burnFlash();
 
     }
 

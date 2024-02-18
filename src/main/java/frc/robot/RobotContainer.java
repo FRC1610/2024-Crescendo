@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
+
 import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -25,7 +27,10 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Launcher;
+import frc.robot.subsystems.Indexer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -53,6 +58,8 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final Intake m_Intake = new Intake();
   private final Arm m_Arm = new Arm();
+  private final Launcher m_Launcher = new Launcher();
+  private final Indexer m_Indexer = new Indexer();
 
   //private final SendableChooser<Command> autoChooser;
 
@@ -71,8 +78,6 @@ public class RobotContainer {
     //autoChooser = AutoBuilder.buildAutoChooser();
 
     //SmartDashboard.putData("Auto Chooser",autoChooser);
-    
-    //m_Intake = new IntakeSubsystem();
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -86,8 +91,14 @@ public class RobotContainer {
                 true, true),
             m_robotDrive));
 
-    // Intake 
+    // Intake
     m_Intake.setDefaultCommand(m_Intake.StopIntakeCommand());
+
+    // Launcher
+    m_Launcher.setDefaultCommand(m_Launcher.StopLauncherCommand());
+
+    // Indexer
+    m_Indexer.setDefaultCommand(m_Indexer.StopIndexerCommand());
 
   }
 
@@ -110,12 +121,36 @@ public class RobotContainer {
             m_robotDrive));
 
   // Intake FORWARD
-    new JoystickButton(m_OperatorController, Button.kRightBumper.value)
-      .whileTrue(m_Intake.RunIntakeCommand(0.75)); // Run intake motor FORWARD at 40% power while button held (adjust intake speed here)
+    new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
+      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
 
   // Intake REVERSE
-    new JoystickButton(m_OperatorController, Button.kLeftBumper.value)
-      .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 40% power while button held (adjust intake speed here)
+    new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
+      .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 75% power while button held (adjust intake speed here)
+
+  // Launcher SUBWOOFER Speed
+    new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
+      .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 50% power while button held (adjust launcher speed here)
+      // This would be a good spot to add a command for the arm setpoint and change this to a toggle
+      // Press the button once to move to setpoint and run the flywheels, press again to release (or press another button)
+
+  // Launcher PODIUM Speed
+    new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
+      .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 60% power while button held (adjust launcher speed here)
+
+  // Launcher WING Speed
+    new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X
+      .whileTrue((m_Launcher.RunLauncherRPMCommand(1000))); // Run launcher at 1000 RPM while button held (adjust launcher speed here)
+
+  // Launcher AMP Speed
+    new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
+      .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
+    
+
+  // Run Indexer
+    new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
+      .whileTrue((m_Indexer.RunIndexerCommand(0.5))); // Run indexer at 50% power while button held (adjust indexer speed here)
+
 
   /*
   //Arm Speaker Position

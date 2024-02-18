@@ -126,7 +126,7 @@ public final class Constants {
   // INTAKE
   public static final class IntakeConstants {
     public static final IdleMode kIntakeMotorIdleMode = IdleMode.kBrake;
-    public static final int kIntakeMotorCurrentLimit = 30; // amps
+    public static final int kIntakeMotorCurrentLimit = 40; // amps
   }
 
   // ARM
@@ -135,10 +135,18 @@ public final class Constants {
     public static final int kArmMotorCurrentLimit = 50; // amps
   }
 
+  // INDEXER
+  public static final class IndexerConstants {
+    public static final IdleMode kIndexerMotorIdleMode = IdleMode.kBrake;
+    public static final int kIndexerMotorCurrentLimit = 30; // amps
+    public static final int kIndexerSensorDIOPort = 1; 
+  }
+
   // LAUNCHER 
   public static final class LauncherConstants {
     public static final IdleMode kLauncherMotorIdleMode = IdleMode.kCoast;
     public static final int kLauncherMotorCurrentLimit = 50; // amps
+    public static final double kLauncherRampRate = 0.5; //seconds
   }
 
   public static final class AutoConstants {

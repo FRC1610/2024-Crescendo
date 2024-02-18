@@ -20,24 +20,33 @@ public class Arm extends SubsystemBase {
 
     public Arm() {
         // Spark Max Sextup
-        m_ArmMotor = new CANSparkMax(2, MotorType.kBrushless);
+
+        // Master Controller
+        m_ArmMotor = new CANSparkMax(3, MotorType.kBrushless);
         m_ArmMotor.restoreFactoryDefaults();
         m_ArmMotor.setIdleMode(ArmConstants.kArmMotorIdleMode);
         m_ArmMotor.setSmartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
-        
+        m_ArmMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
+        m_ArmMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+        m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 100);
+        m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 2);
+
+        //Master Controller PID
         m_ArmEncoder = m_ArmMotor.getAbsoluteEncoder(Type.kDutyCycle);
+        m_ArmEncoder.setInverted(false);
         m_ArmPID = m_ArmMotor.getPIDController();
         m_ArmPID.setFeedbackDevice(m_ArmEncoder);
 
-        m_ArmFollower = new CANSparkMax(3, MotorType.kBrushless);
+        //Follower Controller
+        m_ArmFollower = new CANSparkMax(2, MotorType.kBrushless);
         m_ArmFollower.restoreFactoryDefaults();
         m_ArmFollower.setIdleMode(ArmConstants.kArmMotorIdleMode);
         m_ArmFollower.setSmartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
         m_ArmFollower.follow(m_ArmMotor, true);
 
+        //Burn flash to both controllers
         m_ArmMotor.burnFlash();
         m_ArmFollower.burnFlash();
-
     }
 
     private void setPosition(double targetPosition){
@@ -47,8 +56,16 @@ public class Arm extends SubsystemBase {
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);
     }
 
+    private void resetArm(){
+        m_ArmMotor.set(0); //Stop arm motors
+    }
+
     public Command SetPositionCommand(double targetPosition){
         return this.startEnd(() -> this.setPosition(targetPosition), () ->{});
+    }
+
+    public Command RestArmCommand(){
+        return this.runOnce(() -> this.resetArm());
     }
 
     @Override

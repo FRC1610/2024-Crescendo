@@ -125,7 +125,7 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
-      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
@@ -133,11 +133,11 @@ public class RobotContainer {
 
   // Launcher SUBWOOFER Speed
     new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
-       .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 50% power while button held (adjust launcher speed here)
+       .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 60% power while button held (adjust launcher speed here)
       
   // Launcher PODIUM Speed
     new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
-      .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
 
   // Launcher WING Speed
     new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X
@@ -145,7 +145,7 @@ public class RobotContainer {
 
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
-      .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherCommand(0.05, 0.05))); // Run launcher at 60% power while button held (adjust launcher speed here)
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper

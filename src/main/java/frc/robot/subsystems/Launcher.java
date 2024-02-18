@@ -21,7 +21,7 @@ public class Launcher extends SubsystemBase {
         m_LauncherMotor.setSmartCurrentLimit(LauncherConstants.kLauncherMotorCurrentLimit);
         m_LauncherMotor.setOpenLoopRampRate(LauncherConstants.kLauncherRampRate);
         m_LauncherMotor.setInverted(true);
-        m_LauncherMotor.burnFlash();
+        //m_LauncherMotor.burnFlash();
 
         m_LauncherFollower = new CANSparkMax(9, MotorType.kBrushless);
         m_LauncherFollower.restoreFactoryDefaults();
@@ -30,7 +30,7 @@ public class Launcher extends SubsystemBase {
         m_LauncherFollower.setOpenLoopRampRate(LauncherConstants.kLauncherRampRate);
         //m_LauncherFollower.follow(m_LauncherMotor, true);
         m_LauncherMotor.setInverted(true);
-        m_LauncherFollower.burnFlash();
+        //m_LauncherFollower.burnFlash();
     }
 
 private void StopLauncher() {

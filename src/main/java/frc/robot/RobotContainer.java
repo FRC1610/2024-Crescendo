@@ -78,8 +78,8 @@ public class RobotContainer {
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
-        // The left stick controls translation of the robot.
-        // Turning is controlled by the X axis of the right stick.
+    // The left stick controls translation of the robot.
+    // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
@@ -150,6 +150,14 @@ public class RobotContainer {
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
       .whileTrue((m_Indexer.RunIndexerCommand(0.5))); // Run indexer at 50% power while button held (adjust indexer speed here)
+
+
+  // Arm Up and Down for testing
+    new JoystickButton(m_driverController, Button.kA.value)
+      .onTrue(m_Arm.armUPcommand());
+
+    new JoystickButton(m_driverController, Button.kB.value)
+      .onTrue(m_Arm.armDOWNcommand());
 
   /*
   //Arm Speaker Position

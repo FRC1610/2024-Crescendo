@@ -50,10 +50,23 @@ public class Arm extends SubsystemBase {
     }
 
     private void setPosition(double targetPosition){
-        m_ArmPID.setP(1);
-        m_ArmPID.setI(0.1);
+        m_ArmPID.setP(0.05);
+        m_ArmPID.setI(0);
         m_ArmPID.setD(0);
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);
+    }
+
+    private void armUP(){
+        double currentPosition = m_ArmEncoder.getPosition();
+        double newPosition = currentPosition + 1;
+        setPosition(newPosition);
+    }
+
+    private void armDown(){
+        double currentPosition = m_ArmEncoder.getPosition();
+        double newPosition = currentPosition - 1;
+        setPosition(newPosition);
+
     }
 
     private void resetArm(){
@@ -68,8 +81,17 @@ public class Arm extends SubsystemBase {
         return this.runOnce(() -> this.resetArm());
     }
 
+    public Command armUPcommand(){
+        return this.startEnd(() -> this.armUP(), () ->{});
+    }
+
+    public Command armDOWNcommand(){
+        return this.startEnd(() -> this.armDown(), () ->{});
+    }
+
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Arm Position", m_ArmEncoder.getPosition());
+        double rotation = m_ArmEncoder.getPosition();
+        SmartDashboard.putNumber("Arm Position", rotation);
     }
 }

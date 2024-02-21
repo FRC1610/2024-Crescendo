@@ -16,13 +16,10 @@ import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.trajectory.TrajectoryConfig;
 //import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
-//import edu.wpi.first.wpilibj.PS4Controller;
-//import edu.wpi.first.wpilibj.PS4Controller.Button;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.Constants.AutoConstants;
-//import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
@@ -30,6 +27,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Indexer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -81,8 +79,8 @@ public class RobotContainer {
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
-        // The left stick controls translation of the robot.
-        // Turning is controlled by the X axis of the right stick.
+    // The left stick controls translation of the robot.
+    // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () -> m_robotDrive.drive(
                 -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
@@ -99,6 +97,12 @@ public class RobotContainer {
 
     // Indexer
     m_Indexer.setDefaultCommand(m_Indexer.StopIndexerCommand());
+
+    // Arm
+    m_Arm.setDefaultCommand(m_Arm.RestArmCommand());
+
+    // Launcher Position Command Groups
+    ParallelCommandGroup LauncherSubwooferCommandGroup = new ParallelCommandGroup();
 
   }
 
@@ -122,7 +126,7 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
-      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 75% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
@@ -130,13 +134,11 @@ public class RobotContainer {
 
   // Launcher SUBWOOFER Speed
     new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
-      .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 50% power while button held (adjust launcher speed here)
-      // This would be a good spot to add a command for the arm setpoint and change this to a toggle
-      // Press the button once to move to setpoint and run the flywheels, press again to release (or press another button)
-
+       .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 60% power while button held (adjust launcher speed here)
+      
   // Launcher PODIUM Speed
     new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
-      .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
 
   // Launcher WING Speed
     new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X
@@ -145,29 +147,31 @@ public class RobotContainer {
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
       .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
-    
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
-      .whileTrue((m_Indexer.RunIndexerCommand(0.5))); // Run indexer at 50% power while button held (adjust indexer speed here)
-
-
-  /*
-  //Arm Speaker Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kA.value)
-      .onTrue(m_Arm.SetPositionCommand(3.0)); //Real position to be determined 
+      .whileTrue((m_Indexer.RunIndexerCommand(0.25))); // Run indexer at 50% power while button held (adjust indexer speed here)
+   
+  //Arm Wing Position
+    new JoystickButton(m_driverController, XboxController.Button.kX.value)
+      .onTrue(m_Arm.SetPositionCommand(50.0)); //Real position to be determined 
 
   //Arm Sub Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kB.value)
-      .onTrue(m_Arm.SetPositionCommand(2.0)); //Real position to be determined
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+      .onTrue(m_Arm.SetPositionCommand(88.0)); //Real position to be determined
 
-  //Arm Down Position
+  //Arm Back Position
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+      .onTrue(m_Arm.SetPositionCommand(135.0));
+
+    
+   /*   
+  //Arm Podium Position
     new JoystickButton(m_OperatorController, XboxController.Button.kX.value)
       .onTrue(m_Arm.SetPositionCommand(1.0)); //Real position to be determined
   */
-
   }
-
+  
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

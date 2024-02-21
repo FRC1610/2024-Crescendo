@@ -6,10 +6,13 @@ import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
+
 
 
 public class Arm extends SubsystemBase {
@@ -24,16 +27,20 @@ public class Arm extends SubsystemBase {
         // Master Controller
         m_ArmMotor = new CANSparkMax(3, MotorType.kBrushless);
         m_ArmMotor.restoreFactoryDefaults();
+        m_ArmMotor.setInverted(true);
         m_ArmMotor.setIdleMode(ArmConstants.kArmMotorIdleMode);
         m_ArmMotor.setSmartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
         m_ArmMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kForward, true);
         m_ArmMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
-        m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 100);
-        m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 2);
+        m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 135);
+        m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 35);
+        
+        
 
         //Master Controller PID
         m_ArmEncoder = m_ArmMotor.getAbsoluteEncoder(Type.kDutyCycle);
         m_ArmEncoder.setInverted(false);
+        m_ArmEncoder.setPositionConversionFactor(360.0);
         m_ArmPID = m_ArmMotor.getPIDController();
         m_ArmPID.setFeedbackDevice(m_ArmEncoder);
 
@@ -50,7 +57,7 @@ public class Arm extends SubsystemBase {
     }
 
     private void setPosition(double targetPosition){
-        m_ArmPID.setP(0.05);
+        m_ArmPID.setP(0.02);
         m_ArmPID.setI(0);
         m_ArmPID.setD(0);
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);

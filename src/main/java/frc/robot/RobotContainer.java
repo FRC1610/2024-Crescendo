@@ -16,6 +16,7 @@ import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.trajectory.TrajectoryConfig;
 //import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -145,36 +146,32 @@ public class RobotContainer {
 
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
-      .whileTrue((m_Launcher.RunLauncherCommand(0.05, 0.05))); // Run launcher at 60% power while button held (adjust launcher speed here)
+      .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
-      .whileTrue((m_Indexer.RunIndexerCommand(0.5))); // Run indexer at 50% power while button held (adjust indexer speed here)
-
-
-  // Arm Up and Down for testing
-    new JoystickButton(m_driverController, Button.kA.value)
-      .onTrue(m_Arm.armUPcommand());
-
-    new JoystickButton(m_driverController, Button.kB.value)
-      .onTrue(m_Arm.armDOWNcommand());
-
-  /*
-  //Arm Speaker Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kA.value)
-      .onTrue(m_Arm.SetPositionCommand(3.0)); //Real position to be determined 
+      .whileTrue((m_Indexer.RunIndexerCommand(0.25))); // Run indexer at 50% power while button held (adjust indexer speed here)
+   
+  //Arm Wing Position
+    new JoystickButton(m_driverController, XboxController.Button.kX.value)
+      .onTrue(m_Arm.SetPositionCommand(50.0)); //Real position to be determined 
 
   //Arm Sub Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kB.value)
-      .onTrue(m_Arm.SetPositionCommand(2.0)); //Real position to be determined
+    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+      .onTrue(m_Arm.SetPositionCommand(88.0)); //Real position to be determined
 
-  //Arm Down Position
+  //Arm Back Position
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+      .onTrue(m_Arm.SetPositionCommand(135.0));
+
+    
+   /*   
+  //Arm Podium Position
     new JoystickButton(m_OperatorController, XboxController.Button.kX.value)
       .onTrue(m_Arm.SetPositionCommand(1.0)); //Real position to be determined
   */
-
   }
-
+  
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

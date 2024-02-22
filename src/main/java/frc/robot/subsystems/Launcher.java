@@ -43,6 +43,7 @@ private void RunLauncher(double LauncherSpeedLeft, double LauncherSpeedRight) {
     m_LauncherFollower.set(LauncherSpeedLeft);
 }
 
+/*
 private void RunLauncherRPM(double LauncherRPM) {
     // PID Setup
     SparkPIDController LauncherPID = m_LauncherMotor.getPIDController();
@@ -54,6 +55,7 @@ private void RunLauncherRPM(double LauncherRPM) {
     LauncherPID.setD(kD);
     LauncherPID.setReference(LauncherRPM, ControlType.kVelocity); // Run launcher motors
 }
+*/
 
 public Command StopLauncherCommand() {
     return this.runOnce(() -> this.StopLauncher());
@@ -63,9 +65,11 @@ public Command RunLauncherCommand(double LauncherSpeedLeft, double LauncherSpeed
     return this.run(() -> this.RunLauncher(LauncherSpeedLeft, LauncherSpeedRight));
 }
 
+/*
 public Command RunLauncherRPMCommand(double LauncherRPM) {
     return this.run(() -> this.RunLauncherRPM(LauncherRPM));
 }
+*/
 
 @Override
 public void periodic() {

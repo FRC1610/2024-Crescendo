@@ -6,14 +6,11 @@ import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
-
-
 
 public class Arm extends SubsystemBase {
     private final CANSparkMax m_ArmMotor;
@@ -34,8 +31,6 @@ public class Arm extends SubsystemBase {
         m_ArmMotor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
         m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kForward, 135);
         m_ArmMotor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 35);
-        
-        
 
         //Master Controller PID
         m_ArmEncoder = m_ArmMotor.getAbsoluteEncoder(Type.kDutyCycle);

@@ -164,12 +164,6 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
       .onTrue(m_Arm.SetPositionCommand(135.0));
 
-    
-   /*   
-  //Arm Podium Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kX.value)
-      .onTrue(m_Arm.SetPositionCommand(1.0)); //Real position to be determined
-  */
   }
   
   /**

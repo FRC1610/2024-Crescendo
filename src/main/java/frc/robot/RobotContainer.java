@@ -102,7 +102,7 @@ public class RobotContainer {
     m_Arm.setDefaultCommand(m_Arm.RestArmCommand());
 
     // Launcher Position Command Groups
-    ParallelCommandGroup LauncherSubwooferCommandGroup = new ParallelCommandGroup();
+    ParallelCommandGroup LauncherArmCommandGroup = new ParallelCommandGroup();
 
   }
 
@@ -153,15 +153,15 @@ public class RobotContainer {
       .whileTrue((m_Indexer.RunIndexerCommand(0.25))); // Run indexer at 50% power while button held (adjust indexer speed here)
    
   //Arm Wing Position
-    new JoystickButton(m_driverController, XboxController.Button.kX.value)
+    new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
       .onTrue(m_Arm.SetPositionCommand(50.0)); //Real position to be determined 
 
-  //Arm Sub Position
-    new JoystickButton(m_driverController, XboxController.Button.kY.value)
+  //Arm Subwoofer Position
+    new JoystickButton(m_driverController, XboxController.Button.kY.value) // USB 0 - Button Y
       .onTrue(m_Arm.SetPositionCommand(88.0)); //Real position to be determined
 
-  //Arm Back Position
-    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+  //Arm Max Back Position
+    new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
       .onTrue(m_Arm.SetPositionCommand(135.0));
 
     

@@ -23,7 +23,7 @@ public class Arm extends SubsystemBase {
 
         // Master Controller
         m_ArmMotor = new CANSparkMax(3, MotorType.kBrushless);
-        m_ArmMotor.restoreFactoryDefaults();
+        //m_ArmMotor.restoreFactoryDefaults();
         m_ArmMotor.setInverted(true);
         m_ArmMotor.setIdleMode(ArmConstants.kArmMotorIdleMode);
         m_ArmMotor.setSmartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
@@ -41,14 +41,14 @@ public class Arm extends SubsystemBase {
 
         //Follower Controller
         m_ArmFollower = new CANSparkMax(2, MotorType.kBrushless);
-        m_ArmFollower.restoreFactoryDefaults();
+        //m_ArmFollower.restoreFactoryDefaults();
         m_ArmFollower.setIdleMode(ArmConstants.kArmMotorIdleMode);
         m_ArmFollower.setSmartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
         m_ArmFollower.follow(m_ArmMotor, true);
 
         //Burn flash to both controllers
-        m_ArmMotor.burnFlash();
-        m_ArmFollower.burnFlash();
+        //m_ArmMotor.burnFlash();
+        //m_ArmFollower.burnFlash();
     }
 
     private void setPosition(double targetPosition){
@@ -58,6 +58,7 @@ public class Arm extends SubsystemBase {
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);
     }
 
+/*
     private void armUP(){
         double currentPosition = m_ArmEncoder.getPosition();
         double newPosition = currentPosition + 1;
@@ -70,6 +71,8 @@ public class Arm extends SubsystemBase {
         setPosition(newPosition);
 
     }
+
+*/
 
     private void resetArm(){
         m_ArmMotor.set(0); //Stop arm motors

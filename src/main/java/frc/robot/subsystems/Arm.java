@@ -86,6 +86,7 @@ public class Arm extends SubsystemBase {
         return this.runOnce(() -> this.resetArm());
     }
 
+    /*
     public Command armUPcommand(){
         return this.startEnd(() -> this.armUP(), () ->{});
     }
@@ -93,6 +94,7 @@ public class Arm extends SubsystemBase {
     public Command armDOWNcommand(){
         return this.startEnd(() -> this.armDown(), () ->{});
     }
+    */
 
     @Override
     public void periodic() {

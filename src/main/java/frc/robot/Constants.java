@@ -136,7 +136,7 @@ public final class Constants {
     public static final int kArmMotorCurrentLimit = 50; // amps
     public static final double kArmMax = 135.0;
     public static final double kArmMin = 35.0;
-    public static final double kArmWingPosition = 50.0; //Also 
+    public static final double kArmWingPosition = 50.0; //Also intake position
     public static final double kArmSubwooferPosition = 88.0;
   }
 

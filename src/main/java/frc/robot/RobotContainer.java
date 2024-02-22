@@ -137,7 +137,7 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
-      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
@@ -161,15 +161,15 @@ public class RobotContainer {
    
   //Arm Wing Position
     new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
-      .onTrue(m_Arm.SetPositionCommand(50.0)); //Real position to be determined 
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition));
 
   //Arm Subwoofer Position
     new JoystickButton(m_driverController, XboxController.Button.kY.value) // USB 0 - Button Y
-      .onTrue(m_Arm.SetPositionCommand(88.0)); //Real position to be determined
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)); 
 
   //Arm Max Back Position
     new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
-      .onTrue(m_Arm.SetPositionCommand(135.0));
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
 
   // TEST COMMAND GROUP BUTTON
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)  // USB 0 - Button Left Bumper

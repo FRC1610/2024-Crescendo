@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
-
 import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -20,6 +18,9 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
@@ -58,6 +59,20 @@ public class RobotContainer {
   private final Arm m_Arm = new Arm();
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
+
+  public Command IntakeCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+    );
+  }
+
+  public Command SubwooferCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+    );
+  }
 
   //private final SendableChooser<Command> autoChooser;
 
@@ -101,9 +116,6 @@ public class RobotContainer {
     // Arm
     m_Arm.setDefaultCommand(m_Arm.RestArmCommand());
 
-    // Launcher Position Command Groups
-    ParallelCommandGroup LauncherArmCommandGroup = new ParallelCommandGroup();
-
   }
 
   /**
@@ -115,7 +127,6 @@ public class RobotContainer {
    * passing it to a
    * {@link JoystickButton}.
    */
-
 
   private void configureButtonBindings() {
   // Swerve
@@ -140,12 +151,6 @@ public class RobotContainer {
     new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
       .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
 
-  /*
-  // Launcher WING Speed
-    new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X
-      .whileTrue((m_Launcher.RunLauncherRPMCommand(1000))); // Run launcher at 1000 RPM while button held (adjust launcher speed here)
-  */
-
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
       .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
@@ -166,6 +171,9 @@ public class RobotContainer {
     new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
       .onTrue(m_Arm.SetPositionCommand(135.0));
 
+  // TEST COMMAND GROUP BUTTON
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)  // USB 0 - Button Left Bumper
+      .onTrue(SubwooferCommandGroup());
   }
   
   /**

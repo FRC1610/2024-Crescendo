@@ -127,12 +127,17 @@ public final class Constants {
   public static final class IntakeConstants {
     public static final IdleMode kIntakeMotorIdleMode = IdleMode.kBrake;
     public static final int kIntakeMotorCurrentLimit = 40; // amps
+    public static final double kIntakeSpeed = 0.80;
   }
 
   // ARM
   public static final class ArmConstants {
     public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
     public static final int kArmMotorCurrentLimit = 50; // amps
+    public static final double kArmMax = 135.0;
+    public static final double kArmMin = 35.0;
+    public static final double kArmWingPosition = 50.0;
+    public static final double kArmSubwooferPosition = 88.0;
   }
 
   // INDEXER
@@ -147,6 +152,7 @@ public final class Constants {
     public static final IdleMode kLauncherMotorIdleMode = IdleMode.kCoast;
     public static final int kLauncherMotorCurrentLimit = 50; // amps
     public static final double kLauncherRampRate = 0.5; //seconds
+    public static final double kLauncherSubwooferSpeed = 0.60;
   }
 
   public static final class AutoConstants {

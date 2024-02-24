@@ -157,7 +157,7 @@ public class RobotContainer {
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
-      .whileTrue((m_Indexer.RunIndexerCommand(0.25))); // Run indexer at 50% power while button held (adjust indexer speed here)
+      .whileTrue((m_Indexer.RunIndexerCommand(0.50))); // Run indexer at 50% power while button held (adjust indexer speed here)
    
   //Arm Wing Position
     new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
@@ -173,7 +173,8 @@ public class RobotContainer {
 
   // TEST COMMAND GROUP BUTTON
     new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)  // USB 0 - Button Left Bumper
-      .onTrue(SubwooferCommandGroup());
+      .onTrue(SubwooferCommandGroup())
+      .onFalse(m_Launcher.StopLauncherCommand());
   }
   
   /**

@@ -74,6 +74,13 @@ public class RobotContainer {
     );
   }
 
+  public Command WingCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherWingSpeed, LauncherConstants.kLauncherWingSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+    );
+  }
+
   //private final SendableChooser<Command> autoChooser;
 
   // The driver's controller
@@ -136,20 +143,20 @@ public class RobotContainer {
             m_robotDrive));
 
   // Intake FORWARD
-    new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
-      .whileTrue(m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
+  //  new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
+  //    .whileTrue(m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
       .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 75% power while button held (adjust intake speed here)
 
   // Launcher SUBWOOFER Speed
-    new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
-       .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 60% power while button held (adjust launcher speed here)
+  //  new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
+  //     .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 60% power while button held (adjust launcher speed here)
       
-  // Launcher PODIUM Speed
-    new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
-      .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
+  // Launcher WING Speed
+  //  new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
+  //    .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
 
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
@@ -160,20 +167,30 @@ public class RobotContainer {
       .whileTrue((m_Indexer.RunIndexerCommand(0.50))); // Run indexer at 50% power while button held (adjust indexer speed here)
    
   //Arm Wing Position
-    new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
-      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition));
+  //  new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
+  //    .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition));
 
   //Arm Subwoofer Position
-    new JoystickButton(m_driverController, XboxController.Button.kY.value) // USB 0 - Button Y
-      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)); 
+  //  new JoystickButton(m_driverController, XboxController.Button.kY.value) // USB 0 - Button Y
+  //    .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)); 
 
   //Arm Max Back Position
     new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
       .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
 
-  // TEST COMMAND GROUP BUTTON
-    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)  // USB 0 - Button Left Bumper
+  // Intake Position and Run Intake
+    new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)  // USB 1 - Button Right Bumper
+      .onTrue(IntakeCommandGroup())
+      .onFalse(m_Intake.StopIntakeCommand());
+
+  // Subwoofer Position and Speed
+    new JoystickButton(m_OperatorController, XboxController.Button.kA.value)  // USB 1 - Button A
       .onTrue(SubwooferCommandGroup())
+      .onFalse(m_Launcher.StopLauncherCommand());
+
+  // Wing Position and Speed
+    new JoystickButton(m_OperatorController, XboxController.Button.kB.value)  // USB 1 - Button B
+      .onTrue(WingCommandGroup())
       .onFalse(m_Launcher.StopLauncherCommand());
   }
   

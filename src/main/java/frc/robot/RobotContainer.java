@@ -45,7 +45,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 //import com.pathplanner.lib.path.GoalEndState;
 //import com.pathplanner.lib.path.PathConstraints;
 //import com.pathplanner.lib.path.PathPlannerPath;
- 
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -60,8 +59,6 @@ public class RobotContainer {
   private final Arm m_Arm = new Arm();
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
-
-  
 
   //private final SendableChooser<Command> autoChooser;
 
@@ -146,7 +143,7 @@ public class RobotContainer {
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
-      .whileTrue((m_Indexer.RunIndexerCommand(0.50))); // Run indexer at 50% power while button held (adjust indexer speed here)
+      .whileTrue(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)); // Run indexer at 50% power while button held (adjust indexer speed here)
    
   //Arm Wing Position
   //  new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
@@ -186,13 +183,15 @@ public class RobotContainer {
   // Arm Down Position
     new JoystickButton(m_OperatorController, XboxController.Button.kX.value) // USB 0 - Button X
       .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMin));
-
-    new JoystickButton(m_OperatorController, XboxController.Button.kStart.value)
+  
+  // Source Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kStart.value) // USB 1 - Button Start
       .onTrue(SourceCommandGroup())
       .onFalse(m_Indexer.StopIndexerCommand())
       .onFalse(m_Launcher.StopLauncherCommand());
   }
 
+  // COMMAND GROUPS
 
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(

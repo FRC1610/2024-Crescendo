@@ -11,7 +11,8 @@ import frc.robot.Constants.IndexerConstants;
 public class Indexer extends SubsystemBase {
     private final CANSparkMax m_IndexerMotor;
 
-    private final DigitalInput m_IndexSensor = new DigitalInput(IndexerConstants.kIndexerSensorDIOPort);
+    private final DigitalInput m_IndexSensorRear = new DigitalInput(IndexerConstants.kIndexerSensorRearDIOPort);
+    private final DigitalInput m_IndexSensorFront = new DigitalInput(IndexerConstants.kIndexerSensorFrontDIOPort);
 
     public Indexer() {
         // Spark Max Sextup

@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import javax.swing.plaf.basic.BasicBorders.ToggleButtonBorder;
-
 import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -20,6 +18,9 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveSubsystem;
@@ -58,6 +59,20 @@ public class RobotContainer {
   private final Arm m_Arm = new Arm();
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
+
+  public Command IntakeCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+    );
+  }
+
+  public Command SubwooferCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+    );
+  }
 
   //private final SendableChooser<Command> autoChooser;
 
@@ -101,9 +116,6 @@ public class RobotContainer {
     // Arm
     m_Arm.setDefaultCommand(m_Arm.RestArmCommand());
 
-    // Launcher Position Command Groups
-    ParallelCommandGroup LauncherSubwooferCommandGroup = new ParallelCommandGroup();
-
   }
 
   /**
@@ -116,7 +128,6 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
 
-
   private void configureButtonBindings() {
   // Swerve
     new JoystickButton(m_driverController, Button.kStart.value)
@@ -126,7 +137,7 @@ public class RobotContainer {
 
   // Intake FORWARD
     new JoystickButton(m_OperatorController, Button.kRightBumper.value) // USB 1 Right Bumper
-      .whileTrue(m_Intake.RunIntakeCommand(0.80)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
+      .whileTrue(m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed)); // Run intake motor FORWARD at 80% power while button held (adjust intake speed here)
 
   // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
@@ -140,36 +151,30 @@ public class RobotContainer {
     new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
       .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
 
-  // Launcher WING Speed
-    new JoystickButton(m_OperatorController, Button.kX.value) // USB 1 - Button X
-      .whileTrue((m_Launcher.RunLauncherRPMCommand(1000))); // Run launcher at 1000 RPM while button held (adjust launcher speed here)
-
   // Launcher AMP Speed
     new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
       .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
-      .whileTrue((m_Indexer.RunIndexerCommand(0.25))); // Run indexer at 50% power while button held (adjust indexer speed here)
+      .whileTrue((m_Indexer.RunIndexerCommand(0.50))); // Run indexer at 50% power while button held (adjust indexer speed here)
    
   //Arm Wing Position
-    new JoystickButton(m_driverController, XboxController.Button.kX.value)
-      .onTrue(m_Arm.SetPositionCommand(50.0)); //Real position to be determined 
+    new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB 0 - Button X
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition));
 
-  //Arm Sub Position
-    new JoystickButton(m_driverController, XboxController.Button.kY.value)
-      .onTrue(m_Arm.SetPositionCommand(88.0)); //Real position to be determined
+  //Arm Subwoofer Position
+    new JoystickButton(m_driverController, XboxController.Button.kY.value) // USB 0 - Button Y
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)); 
 
-  //Arm Back Position
-    new JoystickButton(m_driverController, XboxController.Button.kA.value)
-      .onTrue(m_Arm.SetPositionCommand(135.0));
+  //Arm Max Back Position
+    new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
 
-    
-   /*   
-  //Arm Podium Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kX.value)
-      .onTrue(m_Arm.SetPositionCommand(1.0)); //Real position to be determined
-  */
+  // TEST COMMAND GROUP BUTTON
+    new JoystickButton(m_driverController, XboxController.Button.kLeftBumper.value)  // USB 0 - Button Left Bumper
+      .onTrue(SubwooferCommandGroup())
+      .onFalse(m_Launcher.StopLauncherCommand());
   }
   
   /**

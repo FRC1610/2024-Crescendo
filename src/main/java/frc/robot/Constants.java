@@ -144,8 +144,9 @@ public final class Constants {
   public static final class IndexerConstants {
     public static final IdleMode kIndexerMotorIdleMode = IdleMode.kBrake;
     public static final int kIndexerMotorCurrentLimit = 30; // amps
+    public static final int kIndexerSensorFrontDIOPort = 0;
     public static final int kIndexerSensorRearDIOPort = 1; 
-    public static final int kIndexerSensorFrontDIOPort = 2;
+    public static final double kIndexerSpeed = 1.0;
   }
 
   // LAUNCHER 

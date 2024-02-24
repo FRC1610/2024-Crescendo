@@ -60,26 +60,7 @@ public class RobotContainer {
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
 
-  public Command IntakeCommandGroup(){
-    return new ParallelCommandGroup(
-      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
-      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
-    );
-  }
-
-  public Command SubwooferCommandGroup(){
-    return new ParallelCommandGroup(
-      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
-      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)
-    );
-  }
-
-  public Command WingCommandGroup(){
-    return new ParallelCommandGroup(
-      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherWingSpeed, LauncherConstants.kLauncherWingSpeed),
-      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
-    );
-  }
+  
 
   //private final SendableChooser<Command> autoChooser;
 
@@ -180,8 +161,11 @@ public class RobotContainer {
 
   // Intake Position and Run Intake
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)  // USB 1 - Button Right Bumper
-      .onTrue(IntakeCommandGroup())
-      .onFalse(m_Intake.StopIntakeCommand());
+      //.onTrue(IntakeCommandGroup())
+      //.onFalse(m_Intake.StopIntakeCommand());
+      .whileTrue(IntakeCommandGroup())
+      .whileFalse(m_Indexer.StopIndexerCommand())
+      .whileFalse(m_Intake.StopIntakeCommand());
 
   // Subwoofer Position and Speed
     new JoystickButton(m_OperatorController, XboxController.Button.kA.value)  // USB 1 - Button A
@@ -192,6 +176,33 @@ public class RobotContainer {
     new JoystickButton(m_OperatorController, XboxController.Button.kB.value)  // USB 1 - Button B
       .onTrue(WingCommandGroup())
       .onFalse(m_Launcher.StopLauncherCommand());
+
+  // Arm Down Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kX.value) // USB 0 - Button X
+      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMin));
+  }
+
+
+  public Command IntakeCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Intake.RunIntakeCommand(0.5),
+      m_Indexer.IntakeNoteCommand(),
+      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+    );
+  }
+
+  public Command SubwooferCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+    );
+  }
+
+  public Command WingCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherWingSpeed, LauncherConstants.kLauncherWingSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+    );
   }
   
   /**

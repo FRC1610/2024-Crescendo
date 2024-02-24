@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.IndexerConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OIConstants;
@@ -156,8 +157,8 @@ public class RobotContainer {
   //    .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)); 
 
   //Arm Max Back Position
-    new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
-      .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
+  //  new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
+  //    .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
 
   // Intake Position and Run Intake
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)  // USB 1 - Button Right Bumper
@@ -172,14 +173,24 @@ public class RobotContainer {
       .onTrue(SubwooferCommandGroup())
       .onFalse(m_Launcher.StopLauncherCommand());
 
-  // Wing Position and Speed
+  // Podium Position and Speed
     new JoystickButton(m_OperatorController, XboxController.Button.kB.value)  // USB 1 - Button B
+      .onTrue(PodiumCommandGroup())
+      .onFalse(m_Launcher.StopLauncherCommand());
+
+  // Wing Position and Speed
+    new JoystickButton(m_OperatorController, XboxController.Button.kY.value)  // USB 1 - Button Y
       .onTrue(WingCommandGroup())
       .onFalse(m_Launcher.StopLauncherCommand());
 
   // Arm Down Position
     new JoystickButton(m_OperatorController, XboxController.Button.kX.value) // USB 0 - Button X
       .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMin));
+
+    new JoystickButton(m_OperatorController, XboxController.Button.kStart.value)
+      .onTrue(SourceCommandGroup())
+      .onFalse(m_Indexer.StopIndexerCommand())
+      .onFalse(m_Launcher.StopLauncherCommand());
   }
 
 
@@ -187,7 +198,7 @@ public class RobotContainer {
     return new ParallelCommandGroup(
       m_Intake.RunIntakeCommand(0.5),
       m_Indexer.IntakeNoteCommand(),
-      m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+      m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition)
     );
   }
 
@@ -198,10 +209,25 @@ public class RobotContainer {
     );
   }
 
+  public Command PodiumCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmPodiumPosition)
+    );
+  }
+
   public Command WingCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherWingSpeed, LauncherConstants.kLauncherWingSpeed),
       m_Arm.SetPositionCommand(ArmConstants.kArmWingPosition)
+    );
+  }
+
+  public Command SourceCommandGroup(){
+    return new ParallelCommandGroup(
+      m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSourceSpeed, LauncherConstants.kLauncherSourceSpeed),
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSourceSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmSourcePosition)
     );
   }
   

@@ -127,7 +127,7 @@ public final class Constants {
   public static final class IntakeConstants {
     public static final IdleMode kIntakeMotorIdleMode = IdleMode.kBrake;
     public static final int kIntakeMotorCurrentLimit = 40; // amps
-    public static final double kIntakeSpeed = 0.80;
+    public static final double kIntakeSpeed = 0.85;
   }
 
   // ARM

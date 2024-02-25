@@ -71,6 +71,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
+    double tx = LimelightHelpers.getTX("");
+
     // Configure the button bindings
     configureButtonBindings();
 

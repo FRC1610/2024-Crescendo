@@ -73,6 +73,9 @@ public class RobotContainer {
 
     double tx = LimelightHelpers.getTX("");
 
+    // NAMED COMMANDS
+    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
+
     // Configure the button bindings
     configureButtonBindings();
 

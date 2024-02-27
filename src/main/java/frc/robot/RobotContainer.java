@@ -71,6 +71,8 @@ public class RobotContainer {
    */
   public RobotContainer() {
 
+    double tx = LimelightHelpers.getTX("");
+
     // Configure the button bindings
     configureButtonBindings();
 
@@ -195,7 +197,7 @@ public class RobotContainer {
 
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
-      m_Intake.RunIntakeCommand(0.5),
+      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
       m_Indexer.IntakeNoteCommand(),
       m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition)
     );

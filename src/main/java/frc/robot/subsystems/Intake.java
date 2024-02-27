@@ -5,10 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IndexerConstants;
 import frc.robot.Constants.IntakeConstants;
-import edu.wpi.first.wpilibj.DigitalInput;
-
 
 public class Intake extends SubsystemBase {
     private final CANSparkMax m_IntakeMotor;
@@ -48,8 +45,6 @@ private void RunIntake(double IntakeSpeed) {
     m_IntakeMotor.set(IntakeSpeed); // Run intake motor
 }
 
-
-
 public Command StopIntakeCommand() {
     return this.runOnce(() -> this.StopIntake());
 }
@@ -57,8 +52,6 @@ public Command StopIntakeCommand() {
 public Command RunIntakeCommand(double IntakeSpeed) {
     return this.run(() -> this.RunIntake(IntakeSpeed));
 }
-
-
 
 @Override
 public void periodic() {

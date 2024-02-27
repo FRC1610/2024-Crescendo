@@ -15,6 +15,7 @@ import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ArmConstants;
@@ -38,12 +39,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 //import java.util.List;
 
-//import com.pathplanner.lib.auto.AutoBuilder;
-//import com.pathplanner.lib.auto.NamedCommands;
-//import com.pathplanner.lib.commands.PathPlannerAuto;
-//import com.pathplanner.lib.path.GoalEndState;
-//import com.pathplanner.lib.path.PathConstraints;
-//import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -59,7 +60,7 @@ public class RobotContainer {
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
 
-  //private final SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -75,9 +76,9 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    //autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser = AutoBuilder.buildAutoChooser();
 
-    //SmartDashboard.putData("Auto Chooser",autoChooser);
+    SmartDashboard.putData("Auto Chooser",autoChooser);
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -236,12 +237,12 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*
+  
   
    public Command getAutonomousCommand() {
 
     return autoChooser.getSelected();
     
   }
-  */
+  
 }

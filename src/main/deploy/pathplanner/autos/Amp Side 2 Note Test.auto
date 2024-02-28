@@ -26,6 +26,12 @@
                 "data": {
                   "name": "ShootNote"
                 }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
               }
             ]
           }
@@ -69,6 +75,12 @@
                 "type": "named",
                 "data": {
                   "name": "ShootNote"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
                 }
               }
             ]

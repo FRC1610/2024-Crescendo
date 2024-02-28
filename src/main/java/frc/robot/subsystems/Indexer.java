@@ -21,6 +21,7 @@ public class Indexer extends SubsystemBase {
         m_IndexerMotor.restoreFactoryDefaults();
         m_IndexerMotor.setIdleMode(IndexerConstants.kIndexerMotorIdleMode);
         m_IndexerMotor.setSmartCurrentLimit(IndexerConstants.kIndexerMotorCurrentLimit);
+        m_IndexerMotor.setInverted(true);
         m_IndexerMotor.burnFlash();
     }
 

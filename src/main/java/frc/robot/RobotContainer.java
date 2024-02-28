@@ -39,6 +39,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 //import java.util.List;
 
+import com.fasterxml.jackson.databind.node.ShortNode;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -75,6 +76,7 @@ public class RobotContainer {
 
     // NAMED COMMANDS
     NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
+    NamedCommands.registerCommand("ShootNote", m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed));
 
     // Configure the button bindings
     configureButtonBindings();

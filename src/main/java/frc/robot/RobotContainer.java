@@ -76,7 +76,7 @@ public class RobotContainer {
 
     // NAMED COMMANDS
     NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
-    NamedCommands.registerCommand("ShootNote", m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed));
+    NamedCommands.registerCommand("ShootNote", m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed));
 
     // Configure the button bindings
     configureButtonBindings();

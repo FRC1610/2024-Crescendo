@@ -149,7 +149,7 @@ public final class Constants {
     public static final int kIndexerMotorCurrentLimit = 40; // amps
     public static final int kIndexerSensorFrontDIOPort = 0;
     public static final int kIndexerSensorRearDIOPort = 1; 
-    public static final double kIndexerSpeed = 0.85;
+    public static final double kIndexerSpeed = 0.5;
     public static final double kIndexerSourceSpeed = -1.0;
   }
 

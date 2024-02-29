@@ -34,6 +34,31 @@
           "data": {
             "name": "ShootNote"
           }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 5.0
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "StopIndexer"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "StopLauncher"
+                }
+              }
+            ]
+          }
         }
       ]
     }

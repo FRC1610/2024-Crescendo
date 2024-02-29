@@ -77,6 +77,8 @@ public class RobotContainer {
     // NAMED COMMANDS
     NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
     NamedCommands.registerCommand("ShootNote", m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed));
+    NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
+    NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
 
     // Configure the button bindings
     configureButtonBindings();
@@ -202,7 +204,8 @@ public class RobotContainer {
 
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
-      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      //m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
       m_Indexer.IntakeNoteCommand(),
       m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition)
     );

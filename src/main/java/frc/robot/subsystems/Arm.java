@@ -57,6 +57,10 @@ public class Arm extends SubsystemBase {
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);
     }
 
+    public double getAngle(){
+        return m_ArmEncoder.getPosition();
+    }
+
 /*
     private void armUP(){
         double currentPosition = m_ArmEncoder.getPosition();

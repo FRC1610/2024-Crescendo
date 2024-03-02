@@ -204,8 +204,8 @@ public class RobotContainer {
 
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
-      //m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
-      m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
+      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      //m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
       m_Indexer.IntakeNoteCommand(),
       m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition)
     );

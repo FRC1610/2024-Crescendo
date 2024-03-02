@@ -18,25 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "SubwooferPosition"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.25
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootNote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
+                  "name": "SubShootNote"
                 }
               }
             ]
@@ -55,25 +37,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "SubwooferPosition"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.25
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootNote"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.5
+                  "name": "SubShootNote"
                 }
               }
             ]

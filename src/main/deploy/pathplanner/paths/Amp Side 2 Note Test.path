@@ -55,7 +55,7 @@
   "eventMarkers": [
     {
       "name": "Intake",
-      "waypointRelativePos": 1.6,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
@@ -63,7 +63,7 @@
             {
               "type": "named",
               "data": {
-                "name": "RunIntake"
+                "name": "IntakeNote"
               }
             }
           ]

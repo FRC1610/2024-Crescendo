@@ -75,10 +75,11 @@ public class RobotContainer {
     double tx = LimelightHelpers.getTX("");
 
     // NAMED COMMANDS
-    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
-    NamedCommands.registerCommand("ShootNote", m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed));
+    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup().andThen(new WaitCommand(1.0)));
+    NamedCommands.registerCommand("ShootNote", m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(3.0));
     NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
     NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
+    NamedCommands.registerCommand("IntakeNote", IntakeCommandGroup());
 
     // Configure the button bindings
     configureButtonBindings();
@@ -170,9 +171,9 @@ public class RobotContainer {
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)  // USB 1 - Button Right Bumper
       //.onTrue(IntakeCommandGroup())
       //.onFalse(m_Intake.StopIntakeCommand());
-      .whileTrue(IntakeCommandGroup())
-      .whileFalse(m_Indexer.StopIndexerCommand())
-      .whileFalse(m_Intake.StopIntakeCommand());
+      .onTrue(IntakeCommandGroup())
+      .onFalse(m_Indexer.StopIndexerCommand())
+      .onFalse(m_Intake.StopIntakeCommand());
 
   // Subwoofer Position and Speed
     new JoystickButton(m_OperatorController, XboxController.Button.kA.value)  // USB 1 - Button A

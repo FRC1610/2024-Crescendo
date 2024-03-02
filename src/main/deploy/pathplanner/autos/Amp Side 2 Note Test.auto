@@ -12,7 +12,7 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -28,19 +28,6 @@
           "type": "path",
           "data": {
             "pathName": "Amp Side 2 Note Test"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "SubShootNote"
-                }
-              }
-            ]
           }
         }
       ]

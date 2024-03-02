@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -75,8 +76,9 @@ public class RobotContainer {
     double tx = LimelightHelpers.getTX("");
 
     // NAMED COMMANDS
-    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup().andThen(new WaitCommand(1.0)));
-    NamedCommands.registerCommand("ShootNote", m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(3.0));
+    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
+    NamedCommands.registerCommand("SubShootNote", AutoSubShootCommand());
+    NamedCommands.registerCommand("Shoot:", m_Indexer.RunIndexerCommand(.5).withTimeout(0.25));
     NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
     NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
     NamedCommands.registerCommand("IntakeNote", IntakeCommandGroup());
@@ -239,6 +241,14 @@ public class RobotContainer {
       m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSourceSpeed),
       m_Arm.SetPositionCommand(ArmConstants.kArmSourcePosition)
     );
+  }
+
+  public Command AutoSubShootCommand(){
+    return new SequentialCommandGroup(
+      SubwooferCommandGroup()
+      //.alongWith(new WaitCommand(1.5)
+      .andThen(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed))
+      .withTimeout(1.5));
   }
   
   /**

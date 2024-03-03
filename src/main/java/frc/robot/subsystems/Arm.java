@@ -66,22 +66,6 @@ public class Arm extends SubsystemBase {
         return m_ArmEncoder.getPosition();
     }
 
-/*
-    private void armUP(){
-        double currentPosition = m_ArmEncoder.getPosition();
-        double newPosition = currentPosition + 1;
-        setPosition(newPosition);
-    }
-
-    private void armDown(){
-        double currentPosition = m_ArmEncoder.getPosition();
-        double newPosition = currentPosition - 1;
-        setPosition(newPosition);
-
-    }
-
-*/
-
     private void resetArm(){
         m_ArmMotor.set(0); //Stop arm motors
     }
@@ -97,16 +81,6 @@ public class Arm extends SubsystemBase {
     public Boolean armAtSetpoint() {
         return (Math.abs(getAngle() - m_ArmPostionSetpoint) < ArmConstants.kArmTolerance);
     }
-
-    /*
-    public Command armUPcommand(){
-        return this.startEnd(() -> this.armUP(), () ->{});
-    }
-
-    public Command armDOWNcommand(){
-        return this.startEnd(() -> this.armDown(), () ->{});
-    }
-    */
 
     @Override
     public void periodic() {

@@ -48,23 +48,6 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "Shoot",
-      "waypointRelativePos": 0.0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
       "name": "Intake Note",
       "waypointRelativePos": 0.45,
       "command": {
@@ -75,29 +58,6 @@
               "type": "named",
               "data": {
                 "name": "IntakeNote"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "Shoot 2",
-      "waypointRelativePos": 2.0,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "SubwooferPosition"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "Shoot"
               }
             }
           ]

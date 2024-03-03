@@ -29,6 +29,19 @@
           "data": {
             "pathName": "Amp Side 2 Note Test"
           }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "SubShootNote"
+                }
+              }
+            ]
+          }
         }
       ]
     }

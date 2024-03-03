@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.2270533631976355,
-      "y": 1.5205855866257196
+      "x": 0.6433764218879787,
+      "y": 4.446702226737787
     },
-    "rotation": 0
+    "rotation": -58.091893064346856
   },
   "command": {
     "type": "sequential",
@@ -20,12 +20,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Cross The Line"
+            "pathName": "Get Out The Way"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "Bottom",
   "choreoAuto": false
 }

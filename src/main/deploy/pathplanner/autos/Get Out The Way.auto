@@ -1,0 +1,31 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6526211250620698,
+      "y": 4.4744363362600605
+    },
+    "rotation": -59.56576424655659
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Get Out The Way"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Bottom",
+  "choreoAuto": false
+}

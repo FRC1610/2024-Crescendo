@@ -5,23 +5,16 @@
       "x": 1.043143800573316,
       "y": 6.56743713487427
     },
-    "rotation": 60.0
+    "rotation": 51.922937749718876
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "SubShootNote"
-                }
-              }
-            ]
+            "name": "SubShootNote"
           }
         },
         {
@@ -31,16 +24,9 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "SubShootNote"
-                }
-              }
-            ]
+            "name": "SubShootNote"
           }
         },
         {
@@ -54,10 +40,34 @@
           "data": {
             "name": "SubShootNote"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Side 2 Note + 2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Side 2 Note + 3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "Top",
   "choreoAuto": false
 }

@@ -207,7 +207,7 @@ public class RobotContainer {
 
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
-      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote),
       //m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
       m_Indexer.IntakeNoteCommand(),
       m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition)
@@ -217,7 +217,7 @@ public class RobotContainer {
   public Command SubwooferCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
-      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)
     );
   }
 
@@ -245,10 +245,12 @@ public class RobotContainer {
 
   public Command AutoSubShootCommand(){
     return new SequentialCommandGroup(
-      SubwooferCommandGroup()
+      m_Launcher.SpinUpLauncherCommand(LauncherConstants.kLauncherSourceSpeed, LauncherConstants.kLauncherSourceSpeed),
+      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint),
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(1.5));
       //.alongWith(new WaitCommand(1.5)
-      .andThen(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed))
-      .withTimeout(1.5));
+      // .andThen(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed))
+      // .withTimeout(1.5));
   }
   
   /**

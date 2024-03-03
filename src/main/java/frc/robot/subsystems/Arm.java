@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
@@ -16,6 +18,8 @@ public class Arm extends SubsystemBase {
     private final CANSparkMax m_ArmFollower;
     private final AbsoluteEncoder m_ArmEncoder;
     private final SparkPIDController m_ArmPID;
+
+    private double m_ArmPostionSetpoint = 0;
 
     public Arm() {
         // Spark Max Sextup
@@ -54,6 +58,7 @@ public class Arm extends SubsystemBase {
         m_ArmPID.setP(0.02);
         m_ArmPID.setI(0);
         m_ArmPID.setD(0);
+        m_ArmPostionSetpoint = targetPosition;
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);
     }
 
@@ -87,6 +92,10 @@ public class Arm extends SubsystemBase {
 
     public Command RestArmCommand(){
         return this.runOnce(() -> this.resetArm());
+    }
+
+    public Boolean armAtSetpoint() {
+        return (Math.abs(getAngle() - m_ArmPostionSetpoint) < ArmConstants.kArmTolerance);
     }
 
     /*

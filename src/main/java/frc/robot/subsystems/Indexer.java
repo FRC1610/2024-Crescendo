@@ -42,6 +42,10 @@ private void IntakeNote(){
     }
 }
 
+public boolean hasNote() {
+    return !m_IndexSensorFront.get();
+}
+
 public Command StopIndexerCommand() {
     return this.runOnce(() -> this.StopIndexer());
 }

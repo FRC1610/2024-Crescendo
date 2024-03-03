@@ -63,6 +63,10 @@ public Command RunLauncherCommand(double LauncherSpeedLeft, double LauncherSpeed
     return this.run(() -> this.RunLauncher(LauncherSpeedLeft, LauncherSpeedRight));
 }
 
+public Command SpinUpLauncherCommand(double LauncherSpeedLeft, double LauncherSpeedRight) {
+    return this.runOnce(() -> this.RunLauncher(LauncherSpeedLeft, LauncherSpeedRight));
+}
+
 /*
 public Command RunLauncherRPMCommand(double LauncherRPM) {
     return this.run(() -> this.RunLauncherRPM(LauncherRPM));

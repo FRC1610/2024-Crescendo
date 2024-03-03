@@ -141,6 +141,7 @@ public final class Constants {
     public static final double kArmPodiumPosition = 62.5;
     public static final double kArmSubwooferPosition = 80.0;
     public static final double kArmSourcePosition = 69.0;
+    public static final double kArmTolerance = 3;
   }
 
   // INDEXER

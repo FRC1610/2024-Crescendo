@@ -162,7 +162,7 @@ public final class Constants {
     public static final double kLauncherSubwooferSpeed = 0.58;
     public static final double kLauncherPodiumSpeed = 0.65;
     public static final double kLauncherWingSpeed = 0.75;
-    public static final double kLauncherSourceSpeed = -0.40;
+    public static final double kLauncherSourceSpeed = -0.35;
   }
 
   public static final class AutoConstants {

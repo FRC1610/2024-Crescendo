@@ -245,9 +245,11 @@ public class RobotContainer {
 
   public Command AutoSubShootCommand(){
     return new SequentialCommandGroup(
-      m_Launcher.SpinUpLauncherCommand(LauncherConstants.kLauncherSourceSpeed, LauncherConstants.kLauncherSourceSpeed),
-      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint),
-      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(1.5));
+      new ParallelCommandGroup(
+        m_Launcher.RunLauncherCommand(0.35, 0.35).withTimeout(1.5),
+        m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)
+      ),
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(1.0));
       //.alongWith(new WaitCommand(1.5)
       // .andThen(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed))
       // .withTimeout(1.5));

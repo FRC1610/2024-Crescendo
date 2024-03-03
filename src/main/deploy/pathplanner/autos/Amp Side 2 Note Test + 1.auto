@@ -27,7 +27,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Amp Side 2 Note + 1"
+            "pathName": "Amp Side 2 Note Test"
           }
         },
         {
@@ -41,6 +41,18 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Side 2 Note + 1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
           }
         }
       ]

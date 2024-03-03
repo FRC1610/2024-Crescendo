@@ -18,11 +18,11 @@ public class Indexer extends SubsystemBase {
     public Indexer() {
         // Spark Max Sextup
         m_IndexerMotor = new CANSparkMax(7, MotorType.kBrushless);
-        m_IndexerMotor.restoreFactoryDefaults();
+        //m_IndexerMotor.restoreFactoryDefaults();
         m_IndexerMotor.setIdleMode(IndexerConstants.kIndexerMotorIdleMode);
         m_IndexerMotor.setSmartCurrentLimit(IndexerConstants.kIndexerMotorCurrentLimit);
         m_IndexerMotor.setInverted(true);
-        m_IndexerMotor.burnFlash();
+        //m_IndexerMotor.burnFlash();
     }
 
 private void StopIndexer() {

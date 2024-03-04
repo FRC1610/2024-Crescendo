@@ -156,8 +156,8 @@ public class RobotContainer {
   //    .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at 70% power while button held (adjust launcher speed here)
 
   // Launcher AMP Speed
-    new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
-      .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
+  //  new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
+  //    .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at 60% power while button held (adjust launcher speed here)
 
   // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
@@ -199,7 +199,7 @@ public class RobotContainer {
       .onFalse(m_Launcher.StopLauncherCommand());
 
   // Arm Down Position
-    new JoystickButton(m_OperatorController, XboxController.Button.kX.value) // USB 0 - Button X
+    new JoystickButton(m_OperatorController, XboxController.Button.kX.value) // USB 1 - Button X
       .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMin));
   
   // Source Position

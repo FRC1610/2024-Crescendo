@@ -24,6 +24,7 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.LauncherConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
@@ -61,6 +62,7 @@ public class RobotContainer {
   private final Arm m_Arm = new Arm();
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
+  private final Climber m_Climber = new Climber();
 
   private final SendableChooser<Command> autoChooser;
 
@@ -113,6 +115,9 @@ public class RobotContainer {
 
     // Arm
     m_Arm.setDefaultCommand(m_Arm.RestArmCommand());
+
+    // Climber
+    m_Climber.setDefaultCommand(m_Climber.StopClimberCommand());
 
   }
 

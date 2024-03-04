@@ -80,6 +80,7 @@ public class RobotContainer {
     // NAMED COMMANDS
     NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
     NamedCommands.registerCommand("SubShootNote", AutoSubShootCommand());
+    NamedCommands.registerCommand("PodiumShootNote", AutoPodiumShootCommand());
     NamedCommands.registerCommand("Shoot:", m_Indexer.RunIndexerCommand(.5).withTimeout(0.25));
     NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
     NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
@@ -248,11 +249,22 @@ public class RobotContainer {
     );
   }
 
+  // AUTONOMOUS COMMANDS
+
   public Command AutoSubShootCommand(){
     return new SequentialCommandGroup(
       new ParallelCommandGroup(
         m_Launcher.RunLauncherCommand(0.35, 0.35).withTimeout(1.5), // Switch these back to speeds from constants!
         m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)
+      ),
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(0.5));
+  }
+
+    public Command AutoPodiumShootCommand(){
+    return new SequentialCommandGroup(
+      new ParallelCommandGroup(
+        m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed).withTimeout(1.5), // Switch these back to speeds from constants!
+        m_Arm.SetPositionCommand(ArmConstants.kArmPodiumPosition).until(m_Arm::armAtSetpoint)
       ),
       m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(0.5));
   }

@@ -1,12 +1,13 @@
 package frc.robot.subsystems;
 
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.SparkAbsoluteEncoder.Type;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,6 +18,8 @@ public class Arm extends SubsystemBase {
     private final CANSparkMax m_ArmFollower;
     private final AbsoluteEncoder m_ArmEncoder;
     private final SparkPIDController m_ArmPID;
+
+    private double m_ArmPostionSetpoint = 0;
 
     public Arm() {
         // Spark Max Sextup
@@ -55,24 +58,13 @@ public class Arm extends SubsystemBase {
         m_ArmPID.setP(0.02);
         m_ArmPID.setI(0);
         m_ArmPID.setD(0);
+        m_ArmPostionSetpoint = targetPosition;
         m_ArmPID.setReference(targetPosition, ControlType.kPosition);
     }
 
-/*
-    private void armUP(){
-        double currentPosition = m_ArmEncoder.getPosition();
-        double newPosition = currentPosition + 1;
-        setPosition(newPosition);
+    public double getAngle(){
+        return m_ArmEncoder.getPosition();
     }
-
-    private void armDown(){
-        double currentPosition = m_ArmEncoder.getPosition();
-        double newPosition = currentPosition - 1;
-        setPosition(newPosition);
-
-    }
-
-*/
 
     private void resetArm(){
         m_ArmMotor.set(0); //Stop arm motors
@@ -86,15 +78,9 @@ public class Arm extends SubsystemBase {
         return this.runOnce(() -> this.resetArm());
     }
 
-    /*
-    public Command armUPcommand(){
-        return this.startEnd(() -> this.armUP(), () ->{});
+    public Boolean armAtSetpoint() {
+        return (Math.abs(getAngle() - m_ArmPostionSetpoint) < ArmConstants.kArmTolerance);
     }
-
-    public Command armDOWNcommand(){
-        return this.startEnd(() -> this.armDown(), () ->{});
-    }
-    */
 
     @Override
     public void periodic() {

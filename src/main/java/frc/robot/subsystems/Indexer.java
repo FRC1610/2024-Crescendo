@@ -12,16 +12,17 @@ import frc.robot.Constants.IndexerConstants;
 public class Indexer extends SubsystemBase {
     private final CANSparkMax m_IndexerMotor;
 
-    private final DigitalInput m_IndexSensorRear = new DigitalInput(IndexerConstants.kIndexerSensorRearDIOPort);
+    //private final DigitalInput m_IndexSensorRear = new DigitalInput(IndexerConstants.kIndexerSensorRearDIOPort);
     public final DigitalInput m_IndexSensorFront = new DigitalInput(IndexerConstants.kIndexerSensorFrontDIOPort);
 
     public Indexer() {
         // Spark Max Sextup
         m_IndexerMotor = new CANSparkMax(7, MotorType.kBrushless);
-        m_IndexerMotor.restoreFactoryDefaults();
+        //m_IndexerMotor.restoreFactoryDefaults();
         m_IndexerMotor.setIdleMode(IndexerConstants.kIndexerMotorIdleMode);
         m_IndexerMotor.setSmartCurrentLimit(IndexerConstants.kIndexerMotorCurrentLimit);
-        m_IndexerMotor.burnFlash();
+        m_IndexerMotor.setInverted(true);
+        //m_IndexerMotor.burnFlash();
     }
 
 private void StopIndexer() {
@@ -39,6 +40,10 @@ private void IntakeNote(){
     else{
         m_IndexerMotor.set(0.0);
     }
+}
+
+public boolean hasNote() {
+    return !m_IndexSensorFront.get();
 }
 
 public Command StopIndexerCommand() {

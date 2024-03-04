@@ -14,8 +14,8 @@ import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.trajectory.TrajectoryConfig;
 //import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ArmConstants;
@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -39,12 +40,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 //import java.util.List;
 
-//import com.pathplanner.lib.auto.AutoBuilder;
-//import com.pathplanner.lib.auto.NamedCommands;
-//import com.pathplanner.lib.commands.PathPlannerAuto;
-//import com.pathplanner.lib.path.GoalEndState;
-//import com.pathplanner.lib.path.PathConstraints;
-//import com.pathplanner.lib.path.PathPlannerPath;
+import com.fasterxml.jackson.databind.node.ShortNode;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -60,7 +62,7 @@ public class RobotContainer {
   private final Launcher m_Launcher = new Launcher();
   private final Indexer m_Indexer = new Indexer();
 
-  //private final SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -73,12 +75,20 @@ public class RobotContainer {
 
     double tx = LimelightHelpers.getTX("");
 
+    // NAMED COMMANDS
+    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
+    NamedCommands.registerCommand("SubShootNote", AutoSubShootCommand());
+    NamedCommands.registerCommand("Shoot:", m_Indexer.RunIndexerCommand(.5).withTimeout(0.25));
+    NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
+    NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
+    NamedCommands.registerCommand("IntakeNote", IntakeCommandGroup());
+
     // Configure the button bindings
     configureButtonBindings();
 
-    //autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser = AutoBuilder.buildAutoChooser();
 
-    //SmartDashboard.putData("Auto Chooser",autoChooser);
+    SmartDashboard.putData("Auto Chooser",autoChooser);
 
     // Configure default commands
     m_robotDrive.setDefaultCommand(
@@ -163,9 +173,9 @@ public class RobotContainer {
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)  // USB 1 - Button Right Bumper
       //.onTrue(IntakeCommandGroup())
       //.onFalse(m_Intake.StopIntakeCommand());
-      .whileTrue(IntakeCommandGroup())
-      .whileFalse(m_Indexer.StopIndexerCommand())
-      .whileFalse(m_Intake.StopIntakeCommand());
+      .onTrue(IntakeCommandGroup())
+      .onFalse(m_Indexer.StopIndexerCommand())
+      .onFalse(m_Intake.StopIntakeCommand());
 
   // Subwoofer Position and Speed
     new JoystickButton(m_OperatorController, XboxController.Button.kA.value)  // USB 1 - Button A
@@ -197,7 +207,8 @@ public class RobotContainer {
 
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
-      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed),
+      m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote),
+      //m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
       m_Indexer.IntakeNoteCommand(),
       m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition)
     );
@@ -206,7 +217,7 @@ public class RobotContainer {
   public Command SubwooferCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
-      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+      m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)
     );
   }
 
@@ -231,18 +242,27 @@ public class RobotContainer {
       m_Arm.SetPositionCommand(ArmConstants.kArmSourcePosition)
     );
   }
+
+  public Command AutoSubShootCommand(){
+    return new SequentialCommandGroup(
+      new ParallelCommandGroup(
+        m_Launcher.RunLauncherCommand(0.35, 0.35).withTimeout(1.5), // Switch these back to speeds from constants!
+        m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)
+      ),
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(0.5));
+  }
   
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  /*
+  
   
    public Command getAutonomousCommand() {
 
     return autoChooser.getSelected();
     
   }
-  */
+  
 }

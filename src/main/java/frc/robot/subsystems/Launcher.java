@@ -14,7 +14,7 @@ public class Launcher extends SubsystemBase {
     public Launcher() {
         // Spark Max Sextup
         m_LauncherMotor = new CANSparkMax(8, MotorType.kBrushless);
-        m_LauncherMotor.restoreFactoryDefaults();
+        //m_LauncherMotor.restoreFactoryDefaults();
         m_LauncherMotor.setIdleMode(LauncherConstants.kLauncherMotorIdleMode);
         m_LauncherMotor.setSmartCurrentLimit(LauncherConstants.kLauncherMotorCurrentLimit);
         m_LauncherMotor.setOpenLoopRampRate(LauncherConstants.kLauncherRampRate);
@@ -22,7 +22,7 @@ public class Launcher extends SubsystemBase {
         //m_LauncherMotor.burnFlash();
 
         m_LauncherFollower = new CANSparkMax(9, MotorType.kBrushless);
-        m_LauncherFollower.restoreFactoryDefaults();
+        //m_LauncherFollower.restoreFactoryDefaults();
         m_LauncherFollower.setIdleMode(LauncherConstants.kLauncherMotorIdleMode);
         m_LauncherFollower.setSmartCurrentLimit(LauncherConstants.kLauncherMotorCurrentLimit);
         m_LauncherFollower.setOpenLoopRampRate(LauncherConstants.kLauncherRampRate);
@@ -61,6 +61,10 @@ public Command StopLauncherCommand() {
 
 public Command RunLauncherCommand(double LauncherSpeedLeft, double LauncherSpeedRight) {
     return this.run(() -> this.RunLauncher(LauncherSpeedLeft, LauncherSpeedRight));
+}
+
+public Command SpinUpLauncherCommand(double LauncherSpeedLeft, double LauncherSpeedRight) {
+    return this.runOnce(() -> this.RunLauncher(LauncherSpeedLeft, LauncherSpeedRight));
 }
 
 /*

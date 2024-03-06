@@ -1,0 +1,31 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6711105314102518,
+      "y": 4.4744363362600605
+    },
+    "rotation": -58.781597235653656
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Source PL + Cross The Line"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Source Side",
+  "choreoAuto": false
+}

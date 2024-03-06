@@ -42,6 +42,7 @@ private void IntakeNote(){
     }
 }
 
+// Note Detection
 public boolean hasNote() {
     return !m_IndexSensorFront.get();
 }

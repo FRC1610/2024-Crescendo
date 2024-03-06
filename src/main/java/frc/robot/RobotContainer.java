@@ -212,7 +212,7 @@ public class RobotContainer {
 
   // TELEOP COMMAND GROUPS
 
-  // Puts arm in intake position, runs intake, runs indexer until Note detected
+  // Puts arm in intake position, runs intake, runs Indexer until Note detected
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
       m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote),
@@ -257,7 +257,7 @@ public class RobotContainer {
 
   // AUTONOMOUS COMMANDS
 
-  // Puts arm in Subwoofer position, runs flywheels, runs Indexer after timeout
+  // Puts arm in Subwoofer position and runs flywheels in parallel, then runs Indexer after timeout
   public Command AutoSubShootCommand(){
     return new SequentialCommandGroup(
       new ParallelCommandGroup(
@@ -267,7 +267,7 @@ public class RobotContainer {
       m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
 
-  // Puts arm in Podium position, runs flywheels, runs Indexer after timeout
+  // Puts arm in Podium position and runs flywheels in parallel, then runs Indexer after timeout
     public Command AutoPodiumShootCommand(){
     return new SequentialCommandGroup(
       new ParallelCommandGroup(

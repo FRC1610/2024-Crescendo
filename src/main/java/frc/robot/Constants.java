@@ -134,14 +134,14 @@ public final class Constants {
   public static final class ArmConstants {
     public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
     public static final int kArmMotorCurrentLimit = 50; // amps
-    public static final double kArmMax = 135.0;
-    public static final double kArmMin = 35.0;
-    public static final double kArmIntakePosition = 52.5; // intake position
+    public static final double kArmMax = 135.0; // MAX position - do not change
+    public static final double kArmMin = 35.0; // MIN position - do not change
+    public static final double kArmIntakePosition = 52.5; // Intake position
     public static final double kArmWingPosition = 55.0;
     public static final double kArmPodiumPosition = 62.5;
     public static final double kArmSubwooferPosition = 80.0;
     public static final double kArmSourcePosition = 69.0;
-    public static final double kArmTolerance = 3;
+    public static final double kArmTolerance = 3; // Position tolerance for auto commands
   }
 
   // INDEXER
@@ -158,7 +158,7 @@ public final class Constants {
   public static final class LauncherConstants {
     public static final IdleMode kLauncherMotorIdleMode = IdleMode.kCoast;
     public static final int kLauncherMotorCurrentLimit = 50; // amps
-    public static final double kLauncherRampRate = 0.5; //seconds
+    public static final double kLauncherRampRate = 0.5; // seconds
     public static final double kLauncherSubwooferSpeed = 0.58;
     public static final double kLauncherPodiumSpeed = 0.65;
     public static final double kLauncherWingSpeed = 0.75;
@@ -173,9 +173,9 @@ public final class Constants {
 
   // Autonomous Commands
   public static final class AutoCommandConstants {
-    public static final double kAutoIndexerTimeout = 0.25;
-    public static final double kAutoSubwooferTimeout = 1.5;
-    public static final double kAutoPodiumTimeout = 1.5;
+    public static final double kAutoIndexerTimeout = 0.25; // seconds
+    public static final double kAutoSubwooferTimeout = 1.5; // seconds
+    public static final double kAutoPodiumTimeout = 1.5; // seconds
   }
 
   public static final class AutoConstants {

@@ -165,6 +165,19 @@ public final class Constants {
     public static final double kLauncherSourceSpeed = -0.35;
   }
 
+  // CLIMBER
+  public static final class ClimberConstants {
+    public static final IdleMode kClimberIdleMode = IdleMode.kBrake;
+    public static final int kClimberMotorCurrentLimit = 50; // amps 
+  }
+
+  // Autonomous Commands
+  public static final class AutoCommandConstants {
+    public static final double kAutoIndexerTimeout = 0.25;
+    public static final double kAutoSubwooferTimeout = 1.5;
+    public static final double kAutoPodiumTimeout = 1.5;
+  }
+
   public static final class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;

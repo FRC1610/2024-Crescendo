@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.AutoCommandConstants;
 import frc.robot.Constants.IndexerConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.LauncherConstants;
@@ -209,8 +210,9 @@ public class RobotContainer {
       .onFalse(m_Launcher.StopLauncherCommand());
   }
 
-  // COMMAND GROUPS
+  // TELEOP COMMAND GROUPS
 
+  // Puts arm in intake position, runs intake, runs indexer until Note detected
   public Command IntakeCommandGroup(){
     return new ParallelCommandGroup(
       m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote),
@@ -220,6 +222,7 @@ public class RobotContainer {
     );
   }
 
+  // Puts arm in Subwoofer position, runs flywheels
   public Command SubwooferCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed),
@@ -227,6 +230,7 @@ public class RobotContainer {
     );
   }
 
+  // Puts arm in Podium position, runs flywheels
   public Command PodiumCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed),
@@ -234,6 +238,7 @@ public class RobotContainer {
     );
   }
 
+  // Puts arm in Wing position, runs flywheels
   public Command WingCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherWingSpeed, LauncherConstants.kLauncherWingSpeed),
@@ -241,6 +246,7 @@ public class RobotContainer {
     );
   }
 
+  // Puts arm in Source position, runs flywheels and indexer in reverse
   public Command SourceCommandGroup(){
     return new ParallelCommandGroup(
       m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSourceSpeed, LauncherConstants.kLauncherSourceSpeed),
@@ -251,22 +257,24 @@ public class RobotContainer {
 
   // AUTONOMOUS COMMANDS
 
+  // Puts arm in Subwoofer position, runs flywheels, runs Indexer after timeout
   public Command AutoSubShootCommand(){
     return new SequentialCommandGroup(
       new ParallelCommandGroup(
-        m_Launcher.RunLauncherCommand(0.35, 0.35).withTimeout(1.5), // Switch these back to speeds from constants!
+        m_Launcher.RunLauncherCommand(0.35, 0.35).withTimeout(AutoCommandConstants.kAutoSubwooferTimeout), // Switch these back to speeds from constants!
         m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)
       ),
-      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(0.5));
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
 
+  // Puts arm in Podium position, runs flywheels, runs Indexer after timeout
     public Command AutoPodiumShootCommand(){
     return new SequentialCommandGroup(
       new ParallelCommandGroup(
-        m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed).withTimeout(1.5), // Switch these back to speeds from constants!
+        m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed).withTimeout(AutoCommandConstants.kAutoPodiumTimeout), // Switch these back to speeds from constants!
         m_Arm.SetPositionCommand(ArmConstants.kArmPodiumPosition).until(m_Arm::armAtSetpoint)
       ),
-      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(0.5));
+      m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed).withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
   
   /**

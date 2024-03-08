@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6433764218879787,
-      "y": 4.446702226737787
+      "x": 0.717334047280707,
+      "y": 4.5114151489564245
     },
-    "rotation": -58.091893064346856
+    "rotation": -57.99461679191649
   },
   "command": {
     "type": "sequential",
@@ -20,12 +20,18 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Get Out The Way"
+            "pathName": "Source PL + N3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
           }
         }
       ]
     }
   },
-  "folder": "Bottom",
+  "folder": "Source Side",
   "choreoAuto": false
 }

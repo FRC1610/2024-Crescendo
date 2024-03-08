@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.689599937758434,
+      "y": 6.56743713487427
+    },
+    "rotation": 55.82301122620713
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Side PL + N1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Amp Side",
+  "choreoAuto": false
+}

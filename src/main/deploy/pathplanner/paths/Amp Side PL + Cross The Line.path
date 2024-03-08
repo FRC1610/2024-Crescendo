@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.290505644074351,
-        "y": 5.537577201280529
+        "x": 0.6618658282361609,
+        "y": 6.6192074726491805
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.290505644074349,
-        "y": 5.537577201280529
+        "x": 1.661865828236159,
+        "y": 6.6192074726491805
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.8898392931920998,
-        "y": 5.537577201280529
+        "x": 2.9083286995402817,
+        "y": 6.240174642511447
       },
       "prevControl": {
-        "x": 3.389839293192098,
-        "y": 5.537577201280529
+        "x": 2.3775442956291313,
+        "y": 6.33493285004588
       },
       "nextControl": {
-        "x": 2.3898392931921,
-        "y": 5.537577201280529
+        "x": 3.439113103451432,
+        "y": 6.145416434977014
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.290505644074351,
-        "y": 5.537577201280529
+        "x": 4.785003443880761,
+        "y": 6.240174642511447
       },
       "prevControl": {
-        "x": 0.290505644074351,
-        "y": 5.537577201280529
+        "x": 3.785003443880761,
+        "y": 6.240174642511447
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,25 +46,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "IntakeRun",
-      "waypointRelativePos": 0.0,
-      "command": {
-        "type": "sequential",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "IntakeNote"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 1.5,
     "maxAcceleration": 1.5,
@@ -77,9 +59,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Center",
+  "folder": "Amp Side",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 60.037815903582214,
     "velocity": 0
   },
   "useDefaultConstraints": true

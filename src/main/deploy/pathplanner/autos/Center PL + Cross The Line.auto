@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6526211250620698,
-      "y": 4.4744363362600605
+      "x": 1.272016237726169,
+      "y": 5.528332498106438
     },
-    "rotation": -59.56576424655659
+    "rotation": -179.32596310201555
   },
   "command": {
     "type": "sequential",
@@ -20,12 +20,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Get Out The Way"
+            "pathName": "Center PL + Cross The Line"
           }
         }
       ]
     }
   },
-  "folder": "Bottom",
+  "folder": "Center",
   "choreoAuto": false
 }

@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
 //import edu.wpi.first.math.geometry.Pose2d;
@@ -14,6 +15,7 @@ import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.trajectory.TrajectoryConfig;
 //import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -175,6 +177,13 @@ public class RobotContainer {
   //Arm Max Back Position
   //  new JoystickButton(m_driverController, XboxController.Button.kA.value) // USB 0 - Button A
   //    .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
+
+  //Climber
+    new JoystickButton(m_driverController, Button.kLeftBumper.value)
+      .whileTrue(m_Climber.RunClimberCommand(m_OperatorController.getLeftY(),-0.25))
+      .whileFalse(m_Climber.StopClimberCommand());
+
+  //  new RunCommand(() -> m_Climber.RunClimberCommand(m_OperatorController.getLeftY(), m_OperatorController.getRightY()));
 
   // Intake Position and Run Intake
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value)  // USB 1 - Button Right Bumper

@@ -5,44 +5,47 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 
 public class Climber extends SubsystemBase {
-    private final CANSparkMax m_ClimbMotor;
-    private final CANSparkMax m_ClimbFollower;
+    private final CANSparkMax m_leftClimb;
+    private final CANSparkMax m_rightClimb;
 
     public Climber() {
         // Spark Max Sextup
 
-        // Master Controller
-        m_ClimbMotor = new CANSparkMax(18, MotorType.kBrushless);
-        m_ClimbMotor.restoreFactoryDefaults();
-        m_ClimbMotor.setInverted(true);
-        m_ClimbMotor.setIdleMode(ClimberConstants.kClimberIdleMode);
-        m_ClimbMotor.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
+        // Left Climb Motor
+        m_leftClimb = new CANSparkMax(18, MotorType.kBrushless);
+        m_leftClimb.restoreFactoryDefaults();
+        m_leftClimb.setInverted(true);
+        m_leftClimb.setIdleMode(ClimberConstants.kClimberIdleMode);
+        m_leftClimb.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
 
-        //Follower Controller
-        m_ClimbFollower = new CANSparkMax(19, MotorType.kBrushless);
-        m_ClimbFollower.restoreFactoryDefaults();
-        m_ClimbFollower.setIdleMode(ClimberConstants.kClimberIdleMode);
-        m_ClimbFollower.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
-        m_ClimbFollower.follow(m_ClimbMotor, true);
-
+        //Right Climb Motor
+        m_rightClimb = new CANSparkMax(19, MotorType.kBrushless);
+        m_rightClimb.restoreFactoryDefaults();
+        m_rightClimb.setInverted(false);
+        m_rightClimb.setIdleMode(ClimberConstants.kClimberIdleMode);
+        m_rightClimb.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
+        
         //Burn flash to both controllers
-        m_ClimbMotor.burnFlash();
-        m_ClimbFollower.burnFlash();
+        m_leftClimb.burnFlash();
+        m_rightClimb.burnFlash();
     }
 
 private void StopClimber() {
-    m_ClimbMotor.set(0);
+    m_leftClimb.set(0);
+    m_rightClimb.set(0);
 }
 
-private void RunClimber(double ClimbSpeed) {
-    m_ClimbMotor.set(ClimbSpeed);
+private void RunClimber(double leftSpeed, double rightSpeed) {
+    m_leftClimb.set(leftSpeed);
+    m_rightClimb.set(rightSpeed);
 }
 
-public Command RunClimberCommand (double ClimbSpeed){
-    return this.run(() -> this.RunClimber(ClimbSpeed));
+public Command RunClimberCommand (double leftSpeed, double rightSpeed){
+    return this.run(() -> this.RunClimber(leftSpeed, rightSpeed));
 }
 
 public Command StopClimberCommand () {
@@ -51,6 +54,7 @@ public Command StopClimberCommand () {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("ClimberCurrent", m_ClimbMotor.getOutputCurrent());
+        SmartDashboard.putNumber("ClimberCurrentLeft", m_leftClimb.getOutputCurrent());
+        SmartDashboard.putNumber("ClimberCurrentRight", m_rightClimb.getOutputCurrent());
     }
 }

@@ -180,7 +180,7 @@ public class RobotContainer {
 
   //Climber
     new JoystickButton(m_driverController, Button.kLeftBumper.value)
-      .whileTrue(m_Climber.RunClimberCommand(m_OperatorController.getLeftY(),-0.25))
+      .whileTrue(m_Climber.RunClimberCommand(0.25,0.25))
       .whileFalse(m_Climber.StopClimberCommand());
 
   //  new RunCommand(() -> m_Climber.RunClimberCommand(m_OperatorController.getLeftY(), m_OperatorController.getRightY()));

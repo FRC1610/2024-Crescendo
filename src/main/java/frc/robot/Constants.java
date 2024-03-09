@@ -120,6 +120,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
     public static final double kDriveDeadband = 0.05;
+    public static final double kClimbDeadband = 0.10; // TODO Levi was here
   }
 
 
@@ -169,6 +170,8 @@ public final class Constants {
   public static final class ClimberConstants {
     public static final IdleMode kClimberIdleMode = IdleMode.kBrake;
     public static final int kClimberMotorCurrentLimit = 50; // amps 
+    public static final double kClimberExtendSpeed = 0.25;
+    public static final double kClimberRetractSpeed = -0.25;
   }
 
   // Autonomous Commands

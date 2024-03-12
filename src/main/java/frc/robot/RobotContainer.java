@@ -237,13 +237,20 @@ public class RobotContainer {
         .onTrue(SourceCommandGroup())
         .onFalse(m_Indexer.StopIndexerCommand())
         .onFalse(m_Launcher.StopLauncherCommand());
-  }
+  
+    new JoystickButton(m_driverController, XboxController.Button.kA.value)
+        .onTrue(new InstantCommand(
+            () -> m_robotDrive.zeroHeading()
+        ));
+    }
+
+  
 
   /**
    * Robot container teleop init called in Robot.java
    */
   public void teleopInit() {
-    new ClimbAxisCommand(m_Climber, m_OperatorController::getLeftY, m_OperatorController::getRightY).schedule();
+    new ClimbAxisCommand(m_Climber, () -> m_OperatorController.getLeftY(), () -> m_OperatorController.getRightY()).schedule();
   }
 
   // TELEOP COMMAND GROUPS

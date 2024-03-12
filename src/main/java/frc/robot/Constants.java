@@ -27,7 +27,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxSpeedMetersPerSecond = 4;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     public static final double kDirectionSlewRate = 1.2; // radians per second
@@ -112,7 +112,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 50; // amps
+    public static final int kDrivingMotorCurrentLimit = 55; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -141,7 +141,7 @@ public final class Constants {
     public static final double kArmWingPosition = 55.0;
     public static final double kArmPodiumPosition = 62.5;
     public static final double kArmSubwooferPosition = 80.0;
-    public static final double kArmSourcePosition = 69.0;
+    public static final double kArmSourcePosition = 69;
     public static final double kArmTolerance = 3; // Position tolerance for auto commands
   }
 
@@ -170,8 +170,8 @@ public final class Constants {
   public static final class ClimberConstants {
     public static final IdleMode kClimberIdleMode = IdleMode.kBrake;
     public static final int kClimberMotorCurrentLimit = 50; // amps 
-    public static final double kClimberExtendSpeed = 0.25;
-    public static final double kClimberRetractSpeed = -0.25;
+    public static final double kClimberExtendSpeed = 0.5;
+    public static final double kClimberRetractSpeed = -0.5;
   }
 
   // Autonomous Commands

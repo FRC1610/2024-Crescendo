@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.DoubleSupplier;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -7,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.OIConstants;
 
 public class Climber extends SubsystemBase {
     private final CANSparkMax m_leftClimb;
@@ -22,35 +25,50 @@ public class Climber extends SubsystemBase {
         m_leftClimb.setIdleMode(ClimberConstants.kClimberIdleMode);
         m_leftClimb.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
 
-        //Right Climb Motor
+        // Right Climb Motor
         m_rightClimb = new CANSparkMax(19, MotorType.kBrushless);
         m_rightClimb.restoreFactoryDefaults();
         m_rightClimb.setInverted(false);
         m_rightClimb.setIdleMode(ClimberConstants.kClimberIdleMode);
         m_rightClimb.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
-        
-        //Burn flash to both controllers
+
+        // Burn flash to both controllers
         m_leftClimb.burnFlash();
         m_rightClimb.burnFlash();
     }
 
-private void StopClimber() {
-    m_leftClimb.set(0);
-    m_rightClimb.set(0);
-}
+    private void StopClimber() {
+        m_leftClimb.set(0);
+        m_rightClimb.set(0);
+    }
 
-private void RunClimber(double leftSpeed, double rightSpeed) {
-    m_leftClimb.set(leftSpeed);
-    m_rightClimb.set(rightSpeed);
-}
+    public void SetLeft(double value) {
+        m_leftClimb.set(value);
+    }
+    public void SetRight(double value) {
+        m_rightClimb.set(value);
+    }
 
-public Command RunClimberCommand (double leftSpeed, double rightSpeed){
-    return this.run(() -> this.RunClimber(leftSpeed, rightSpeed));
-}
+    private void RunClimber(double leftSpeed, double rightSpeed) {
+        m_leftClimb.set(leftSpeed);
+        m_rightClimb.set(rightSpeed);
+    }
 
-public Command StopClimberCommand () {
-    return this.runOnce(() -> this.StopClimber());
-}
+    public Command RunClimberCommand(double leftSpeed, double rightSpeed) {
+        return this.run(() -> this.RunClimber(leftSpeed, rightSpeed));
+    }
+
+    public Command RunLeftClimberCommand(double leftSpeed) {
+        return this.run(() -> this.m_leftClimb.set(leftSpeed));
+    }
+
+    public Command RunRightClimberCommand(double rightSpeed) {
+        return this.run(() -> this.m_rightClimb.set(rightSpeed));
+    }
+
+    public Command StopClimberCommand() {
+        return this.runOnce(() -> this.StopClimber());
+    }
 
     @Override
     public void periodic() {

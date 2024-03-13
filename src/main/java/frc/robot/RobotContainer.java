@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RuntimeType;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
 //import edu.wpi.first.math.geometry.Pose2d;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.math.trajectory.TrajectoryConfig;
 //import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -242,9 +244,10 @@ public class RobotContainer {
         .onTrue(new InstantCommand(
             () -> m_robotDrive.zeroHeading()
         ));
-    }
 
-  
+    
+
+    }
 
   /**
    * Robot container teleop init called in Robot.java
@@ -337,5 +340,14 @@ public class RobotContainer {
     return autoChooser.getSelected();
 
   }
+
+  public void periodic(){
+    if(m_Indexer.hasNote()){
+        m_OperatorController.setRumble( RumbleType.kBothRumble, 0.25);
+    }
+    else{
+        m_OperatorController.setRumble(RumbleType.kBothRumble, 0.0);
+    }
+    }
 
 }

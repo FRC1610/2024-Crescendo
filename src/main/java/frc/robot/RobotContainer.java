@@ -343,7 +343,7 @@ public class RobotContainer {
 
   public void periodic(){
     if(m_Indexer.hasNote()){
-        m_OperatorController.setRumble( RumbleType.kBothRumble, 0.25);
+        m_OperatorController.setRumble(RumbleType.kBothRumble, 0.25);
     }
     else{
         m_OperatorController.setRumble(RumbleType.kBothRumble, 0.0);

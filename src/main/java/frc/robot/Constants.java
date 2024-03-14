@@ -152,8 +152,8 @@ public final class Constants {
     public static final int kIndexerSensorFrontDIOPort = 0;
     public static final int kIndexerSensorRearDIOPort = 1; 
     public static final double kIndexerSpeed = 0.5;
-    public static final double kIndexerSourceSpeed = -1.0;
-    public static final double kIndexerRumbleSpeed = 0.5;
+    public static final double kIndexerSourceSpeed = -0.9;
+    public static final double kIndexerRumbleSpeed = 1.0;
   }
 
   // LAUNCHER 

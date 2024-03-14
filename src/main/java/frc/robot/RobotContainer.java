@@ -37,6 +37,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Launcher;
 import frc.robot.subsystems.Indexer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
@@ -256,12 +257,21 @@ public class RobotContainer {
     new ClimbAxisCommand(m_Climber, () -> m_OperatorController.getLeftY(), () -> m_OperatorController.getRightY()).schedule();
   }
 
+  private void SetRumble (double RumbleSpeed){
+    m_OperatorController.setRumble(RumbleType.kBothRumble, RumbleSpeed);
+    m_driverController.setRumble(RumbleType.kBothRumble, RumbleSpeed);
+    }
+
+    public Command RumbleCommand (double RumbleSpeed){
+        return Commands.startEnd(() -> SetRumble(RumbleSpeed), () -> SetRumble(0));
+    }
+
   // TELEOP COMMAND GROUPS
 
   // Puts arm in intake position, runs intake, runs Indexer until Note detected
   public Command IntakeCommandGroup() {
     return new ParallelCommandGroup(
-        m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote),
+        m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote).andThen(RumbleCommand(IndexerConstants.kIndexerRumbleSpeed).withTimeout(0.5) ),
         // m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
         m_Indexer.IntakeNoteCommand(),
         m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition));
@@ -341,13 +351,6 @@ public class RobotContainer {
 
   }
 
-  public void periodic(){
-    if(m_Indexer.hasNote()){
-        m_OperatorController.setRumble(RumbleType.kBothRumble, 0.25);
-    }
-    else{
-        m_OperatorController.setRumble(RumbleType.kBothRumble, 0.0);
-    }
-    }
+  public void periodic(){}
 
 }

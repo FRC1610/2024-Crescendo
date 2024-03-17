@@ -139,7 +139,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
-        Rotation2d.fromDegrees(-m_gyro.getAngle(IMUAxis.kZ)),
+        Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -174,7 +174,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @param rateLimit     Whether to enable rate limiting for smoother control.
    */
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean rateLimit) {
-    System.out.println(String.format("Drive heading: %.2f\nAlliance: %s", getHeading(), DriverStation.getAlliance()));
+    //System.out.println(String.format("Drive heading: %.2f\nAlliance: %s", getHeading(), DriverStation.getAlliance()));
     
     double xSpeedCommanded;
     double ySpeedCommanded;

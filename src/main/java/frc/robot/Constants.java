@@ -140,8 +140,8 @@ public final class Constants {
     public static final double kArmIntakePosition = 52.5; // Intake position
     public static final double kArmWingPosition = 55.0;
     public static final double kArmPodiumPosition = 62.5;
-    public static final double kArmSubwooferPosition = 80.0;
-    public static final double kArmSourcePosition = 69;
+    public static final double kArmSubwooferPosition = 81.0;
+    public static final double kArmSourcePosition = 70.0;
     public static final double kArmTolerance = 3; // Position tolerance for auto commands
   }
 

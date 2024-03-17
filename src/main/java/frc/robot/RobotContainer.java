@@ -5,6 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RuntimeType;
 //import edu.wpi.first.math.controller.PIDController;
@@ -255,6 +258,7 @@ public class RobotContainer {
    */
   public void teleopInit() {
     new ClimbAxisCommand(m_Climber, () -> m_OperatorController.getLeftY(), () -> m_OperatorController.getRightY()).schedule();
+    m_robotDrive.resetOdometry(new Pose2d(new Translation2d(), new Rotation2d(m_robotDrive.getHeading())));  //346 was here
   }
 
   private void SetRumble (double RumbleSpeed){

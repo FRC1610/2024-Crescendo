@@ -1,15 +1,11 @@
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.OIConstants;
 
 public class Climber extends SubsystemBase {
     private final CANSparkMax m_leftClimb;
@@ -20,21 +16,21 @@ public class Climber extends SubsystemBase {
 
         // Left Climb Motor
         m_leftClimb = new CANSparkMax(18, MotorType.kBrushless);
-        m_leftClimb.restoreFactoryDefaults();
+        //m_leftClimb.restoreFactoryDefaults();
         m_leftClimb.setInverted(true);
         m_leftClimb.setIdleMode(ClimberConstants.kClimberIdleMode);
         m_leftClimb.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
 
         // Right Climb Motor
         m_rightClimb = new CANSparkMax(19, MotorType.kBrushless);
-        m_rightClimb.restoreFactoryDefaults();
+        //m_rightClimb.restoreFactoryDefaults();
         m_rightClimb.setInverted(false);
         m_rightClimb.setIdleMode(ClimberConstants.kClimberIdleMode);
         m_rightClimb.setSmartCurrentLimit(ClimberConstants.kClimberMotorCurrentLimit);
 
         // Burn flash to both controllers
-        m_leftClimb.burnFlash();
-        m_rightClimb.burnFlash();
+        //m_leftClimb.burnFlash();
+        //m_rightClimb.burnFlash();
     }
 
     private void StopClimber() {

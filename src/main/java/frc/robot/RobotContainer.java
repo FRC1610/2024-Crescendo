@@ -10,24 +10,13 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RuntimeType;
-//import edu.wpi.first.math.controller.PIDController;
-//import edu.wpi.first.math.controller.ProfiledPIDController;
-//import edu.wpi.first.math.geometry.Pose2d;
-//import edu.wpi.first.math.geometry.Rotation2d;
-//import edu.wpi.first.math.geometry.Translation2d;
-//import edu.wpi.first.math.trajectory.Trajectory;
-//import edu.wpi.first.math.trajectory.TrajectoryConfig;
-//import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ArmConstants;
 import frc.robot.Constants.AutoCommandConstants;
-import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.IndexerConstants;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.LauncherConstants;
@@ -51,11 +40,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-//import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
-import com.fasterxml.jackson.databind.node.ShortNode;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -203,9 +188,9 @@ public class RobotContainer {
     // .onTrue(m_Arm.SetPositionCommand(ArmConstants.kArmMax));
 
     // Climber
-    new JoystickButton(m_driverController, Button.kLeftBumper.value)
-        .whileTrue(m_Climber.RunClimberCommand(0.25, 0.25))
-        .whileFalse(m_Climber.StopClimberCommand());
+    //new JoystickButton(m_driverController, Button.kLeftBumper.value)
+    //    .whileTrue(m_Climber.RunClimberCommand(0.25, 0.25))
+    //    .whileFalse(m_Climber.StopClimberCommand());
 
     // new RunCommand(() ->
     // m_Climber.RunClimberCommand(m_OperatorController.getLeftY(),
@@ -244,26 +229,25 @@ public class RobotContainer {
         .onFalse(m_Indexer.StopIndexerCommand())
         .onFalse(m_Launcher.StopLauncherCommand());
   
+    // Reset Gyro
     new JoystickButton(m_driverController, XboxController.Button.kA.value)
         .onTrue(new InstantCommand(
             () -> m_robotDrive.zeroHeading()
         ));
-
-    
 
     }
 
   /**
    * Robot container teleop init called in Robot.java
    */
-  public void teleopInit() {
-    new ClimbAxisCommand(m_Climber, () -> m_OperatorController.getLeftY(), () -> m_OperatorController.getRightY()).schedule();
-    m_robotDrive.resetOdometry(new Pose2d(new Translation2d(), new Rotation2d(m_robotDrive.getHeading())));  //346 was here
-  }
+    public void teleopInit() {
+        new ClimbAxisCommand(m_Climber, () -> m_OperatorController.getLeftY(), () -> m_OperatorController.getRightY()).schedule();
+        m_robotDrive.resetOdometry(new Pose2d(new Translation2d(), new Rotation2d(m_robotDrive.getHeading())));  //346 was here
+    }
 
-  private void SetRumble (double RumbleSpeed){
-    m_OperatorController.setRumble(RumbleType.kBothRumble, RumbleSpeed);
-    m_driverController.setRumble(RumbleType.kBothRumble, RumbleSpeed);
+    private void SetRumble (double RumbleSpeed){
+        m_OperatorController.setRumble(RumbleType.kBothRumble, RumbleSpeed);
+        m_driverController.setRumble(RumbleType.kBothRumble, RumbleSpeed);
     }
 
     public Command RumbleCommand (double RumbleSpeed){
@@ -276,7 +260,6 @@ public class RobotContainer {
   public Command IntakeCommandGroup() {
     return new ParallelCommandGroup(
         m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote).andThen(RumbleCommand(IndexerConstants.kIndexerRumbleSpeed).withTimeout(0.5) ),
-        // m_Intake.NoteIntakeCommand(IntakeConstants.kIntakeSpeed, m_Arm.getAngle()),
         m_Indexer.IntakeNoteCommand(),
         m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition));
   }
@@ -318,13 +301,7 @@ public class RobotContainer {
   public Command AutoSubShootCommand() {
     return new SequentialCommandGroup(
         new ParallelCommandGroup(
-            m_Launcher.RunLauncherCommand(0.35, 0.35).withTimeout(AutoCommandConstants.kAutoSubwooferTimeout), // Switch
-                                                                                                               // these
-                                                                                                               // back
-                                                                                                               // to
-                                                                                                               // speeds
-                                                                                                               // from
-                                                                                                               // constants!
+            m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed).withTimeout(AutoCommandConstants.kAutoSubwooferTimeout),
             m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)),
         m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)
             .withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
@@ -337,7 +314,7 @@ public class RobotContainer {
         new ParallelCommandGroup(
             m_Launcher
                 .RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed)
-                .withTimeout(AutoCommandConstants.kAutoPodiumTimeout), // Switch these back to speeds from constants!
+                .withTimeout(AutoCommandConstants.kAutoPodiumTimeout),
             m_Arm.SetPositionCommand(ArmConstants.kArmPodiumPosition).until(m_Arm::armAtSetpoint)),
         m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)
             .withTimeout(AutoCommandConstants.kAutoIndexerTimeout));

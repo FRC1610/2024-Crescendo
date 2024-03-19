@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import java.util.function.BooleanSupplier;
-
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;

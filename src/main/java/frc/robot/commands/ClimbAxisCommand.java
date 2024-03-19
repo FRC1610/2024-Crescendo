@@ -1,5 +1,3 @@
-
-// TODO Levi was here
 package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;

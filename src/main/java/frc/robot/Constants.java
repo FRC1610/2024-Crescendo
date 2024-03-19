@@ -27,7 +27,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 4;
+    public static final double kMaxSpeedMetersPerSecond = 4.8; // 4.8 theoretical max
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     public static final double kDirectionSlewRate = 1.2; // radians per second
@@ -112,7 +112,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 55; // amps
+    public static final int kDrivingMotorCurrentLimit = 55; // ampss
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -120,7 +120,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
     public static final double kDriveDeadband = 0.05;
-    public static final double kClimbDeadband = 0.10; // TODO Levi was here
+    public static final double kClimbDeadband = 0.10;
   }
 
 
@@ -128,7 +128,7 @@ public final class Constants {
   public static final class IntakeConstants {
     public static final IdleMode kIntakeMotorIdleMode = IdleMode.kBrake;
     public static final int kIntakeMotorCurrentLimit = 40; // amps
-    public static final double kIntakeSpeed = 0.85;
+    public static final double kIntakeSpeed = 0.80;
   }
 
   // ARM
@@ -140,8 +140,8 @@ public final class Constants {
     public static final double kArmIntakePosition = 52.5; // Intake position
     public static final double kArmWingPosition = 55.0;
     public static final double kArmPodiumPosition = 62.5;
-    public static final double kArmSubwooferPosition = 80.0;
-    public static final double kArmSourcePosition = 69;
+    public static final double kArmSubwooferPosition = 81.0;
+    public static final double kArmSourcePosition = 70.0;
     public static final double kArmTolerance = 3; // Position tolerance for auto commands
   }
 
@@ -152,7 +152,8 @@ public final class Constants {
     public static final int kIndexerSensorFrontDIOPort = 0;
     public static final int kIndexerSensorRearDIOPort = 1; 
     public static final double kIndexerSpeed = 0.5;
-    public static final double kIndexerSourceSpeed = -1.0;
+    public static final double kIndexerSourceSpeed = -0.9;
+    public static final double kIndexerRumbleSpeed = 1.0;
   }
 
   // LAUNCHER 

@@ -5,7 +5,7 @@
       "x": 0.717334047280707,
       "y": 4.5114151489564245
     },
-    "rotation": -57.52880770915146
+    "rotation": -57.99461679191649
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Source PL + N3 Pickup"
+            "pathName": "Source SW + N3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Source SW + C5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
           }
         }
       ]

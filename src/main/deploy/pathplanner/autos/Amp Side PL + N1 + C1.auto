@@ -28,6 +28,18 @@
           "data": {
             "name": "SubShootNote"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp Side SW + C1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
         }
       ]
     }

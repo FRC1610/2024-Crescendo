@@ -228,6 +228,11 @@ public class RobotContainer {
         .onTrue(SourceCommandGroup())
         .onFalse(m_Indexer.StopIndexerCommand())
         .onFalse(m_Launcher.StopLauncherCommand());
+
+    // Amp Position
+    new JoystickButton(m_OperatorController, XboxController.Button.kBack.value) // USB 1 - Button Start
+        .onTrue(AmpCommandGroup())
+        .onFalse(m_Launcher.StopLauncherCommand());
   
     // Reset Gyro
     new JoystickButton(m_driverController, XboxController.Button.kA.value)
@@ -292,6 +297,13 @@ public class RobotContainer {
         m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSourceSpeed, LauncherConstants.kLauncherSourceSpeed),
         m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSourceSpeed),
         m_Arm.SetPositionCommand(ArmConstants.kArmSourcePosition));
+  }
+
+// Puts arm in Amp position, runs flywheels and indexer in reverse
+  public Command AmpCommandGroup() {
+    return new ParallelCommandGroup(
+        m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherAmpSpeed, LauncherConstants.kLauncherAmpSpeed),
+        m_Arm.SetPositionCommand(ArmConstants.kArmAmpPosition));
   }
 
   // AUTONOMOUS COMMANDS

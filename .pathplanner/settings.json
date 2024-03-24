@@ -9,13 +9,11 @@
     "Amp Side"
   ],
   "autoFolders": [
-    "Source Side",
-    "Center",
-    "Misc",
-    "Amp Side"
+    "Amp Side",
+    "Source Side"
   ],
-  "defaultMaxVel": 1.5,
-  "defaultMaxAccel": 1.5,
+  "defaultMaxVel": 2.5,
+  "defaultMaxAccel": 2.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "maxModuleSpeed": 3.0

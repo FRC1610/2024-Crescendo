@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.290505644074351,
-      "y": 5.537577201280529
+      "x": 0.717334047280707,
+      "y": 4.5114151489564245
     },
-    "rotation": 0
+    "rotation": -57.99461679191649
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Center PL + N2"
+            "pathName": "Source SW + C5"
           }
         },
         {
@@ -32,6 +32,6 @@
       ]
     }
   },
-  "folder": null,
+  "folder": "Source Side",
   "choreoAuto": false
 }

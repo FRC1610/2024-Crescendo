@@ -16,12 +16,28 @@
     },
     {
       "anchor": {
+        "x": 4.953435971388072,
+        "y": 4.515113030226061
+      },
+      "prevControl": {
+        "x": 4.07954312682819,
+        "y": 4.945439052168428
+      },
+      "nextControl": {
+        "x": 6.1366651479936465,
+        "y": 3.9324622993218
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
         "x": 7.9326161232967625,
         "y": 4.111268609633994
       },
       "prevControl": {
-        "x": 6.621776856456939,
-        "y": 3.813350594443125
+        "x": 6.7939072652338846,
+        "y": 4.117889009971568
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "IntakeRun",
-      "waypointRelativePos": 0.75,
+      "waypointRelativePos": 1.5,
       "command": {
         "type": "sequential",
         "data": {
@@ -61,7 +77,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Center",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

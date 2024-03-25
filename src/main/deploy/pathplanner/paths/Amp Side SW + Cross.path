@@ -32,11 +32,11 @@
     },
     {
       "anchor": {
-        "x": 4.785003443880761,
+        "x": 7.330159692577451,
         "y": 6.240174642511447
       },
       "prevControl": {
-        "x": 3.785003443880761,
+        "x": 6.330159692577451,
         "y": 6.240174642511447
       },
       "nextControl": null,
@@ -59,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Amp Side",
   "previewStartingState": {
     "rotation": 58.49573328079582,
     "velocity": 0

@@ -30,8 +30,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    CameraServer.startAutomaticCapture();
-    for (int port = 5800; port <= 5809; port++) {
+    CameraServer.startAutomaticCapture();  //For USB Webcam
+
+    for (int port = 5800; port <= 5809; port++) {  //To forward Limelight ports for USB access
       PortForwarder.add(port, "limelight.local", port);
         }
   }

@@ -291,21 +291,28 @@ public class RobotContainer {
   public Command AutoSubShootCommand() {
     return new SequentialCommandGroup(
         new ParallelCommandGroup(
-            m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed).withTimeout(AutoCommandConstants.kAutoSubwooferTimeout),
-            m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)),
-        m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)
+            m_Launcher
+            .RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed)
+            .withTimeout(AutoCommandConstants.kAutoSubwooferTimeout),
+            m_Arm
+            .SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+            .until(m_Arm::armAtSetpoint)),
+        m_Indexer
+            .RunIndexerCommand(IndexerConstants.kIndexerSpeed)
             .withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
 
   // Puts arm in Podium position and runs flywheels in parallel, then runs Indexer after timeout
   public Command AutoPodiumShootCommand() {
     return new SequentialCommandGroup(
-        new ParallelCommandGroup(
-            m_Launcher
-                .RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed)
-                .withTimeout(AutoCommandConstants.kAutoPodiumTimeout),
-            m_Arm.SetPositionCommand(ArmConstants.kArmPodiumPosition).until(m_Arm::armAtSetpoint)),
-        m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)
+        m_Arm
+            .SetPositionCommand(ArmConstants.kArmPodiumPosition)
+            .until(m_Arm::armAtSetpoint),
+        m_Launcher
+            .RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed)
+            .withTimeout(AutoCommandConstants.kAutoPodiumTimeout),
+        m_Indexer
+            .RunIndexerCommand(IndexerConstants.kIndexerSpeed)
             .withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
 

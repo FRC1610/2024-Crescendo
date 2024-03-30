@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.717334047280707,
-      "y": 4.5114151489564245
+      "x": 1.290505644074351,
+      "y": 5.537577201280529
     },
-    "rotation": -57.99461679191649
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -20,30 +20,30 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Source SW + N3"
+            "pathName": "Center SW + N2 + SW"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ArmDown"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Source SW + C5"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SubShootNote"
+            "pathName": "Center SW + C3"
           }
         }
       ]
     }
   },
-  "folder": "Source Side",
+  "folder": "Center",
   "choreoAuto": false
 }

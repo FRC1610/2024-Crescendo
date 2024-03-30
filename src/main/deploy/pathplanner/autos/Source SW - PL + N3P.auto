@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8352460341284319,
-      "y": 6.56743713487427
+      "x": 0.7792735585471171,
+      "y": 4.41249682499365
     },
-    "rotation": 56.76828893202078
+    "rotation": -57.99461679191649
   },
   "command": {
     "type": "sequential",
@@ -20,30 +20,18 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Amp Side SW + N1"
+            "pathName": "Source SW + N3"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "SubShootNote"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Amp Side SW + C1"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SubShootNote"
+            "name": "PodiumShootNote"
           }
         }
       ]
     }
   },
-  "folder": "Amp Side",
+  "folder": "Source Side",
   "choreoAuto": false
 }

@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.290505644074351,
-      "y": 5.537577201280529
+      "x": 0.81,
+      "y": 4.45
     },
-    "rotation": 0
+    "rotation": -56.564428750362346
   },
   "command": {
     "type": "sequential",
@@ -20,30 +20,18 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Center PL + N2"
+            "pathName": "Source SW + C5"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "SubShootNote"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ArmDown"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Center SW to C3"
+            "name": "PodiumShootNote"
           }
         }
       ]
     }
   },
-  "folder": "Center",
+  "folder": "Misc",
   "choreoAuto": false
 }

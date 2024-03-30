@@ -20,13 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Amp Side SW + N1"
+            "pathName": "Amp SW + N1"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "SubShootNote"
+            "name": "PodiumShootNote"
           }
         }
       ]

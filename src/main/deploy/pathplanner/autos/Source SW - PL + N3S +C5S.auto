@@ -28,6 +28,18 @@
           "data": {
             "name": "SubShootNote"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Source SW + C5 + SW"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
         }
       ]
     }

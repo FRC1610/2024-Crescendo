@@ -3,12 +3,28 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.290505644074351,
-        "y": 5.537577201280529
+        "x": 1.3856420440113608,
+        "y": 5.550603828480384
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.290505644074349,
+        "x": 2.3856420440113593,
+        "y": 5.550603828480384
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.5890502690096286,
+        "y": 5.537577201280529
+      },
+      "prevControl": {
+        "x": 1.9788998595196206,
+        "y": 5.537577201280529
+      },
+      "nextControl": {
+        "x": 3.089050269009629,
         "y": 5.537577201280529
       },
       "isLocked": false,
@@ -16,28 +32,12 @@
     },
     {
       "anchor": {
-        "x": 4.953435971388072,
-        "y": 4.515113030226061
+        "x": 1.4322857736624564,
+        "y": 5.541275082550166
       },
       "prevControl": {
-        "x": 4.07954312682819,
-        "y": 4.945439052168428
-      },
-      "nextControl": {
-        "x": 6.1366651479936465,
-        "y": 3.9324622993218
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 7.9326161232967625,
-        "y": 4.111268609633994
-      },
-      "prevControl": {
-        "x": 6.7939072652338846,
-        "y": 4.117889009971568
+        "x": 1.256393299936911,
+        "y": 5.541275082550166
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "IntakeRun",
-      "waypointRelativePos": 1.5,
+      "waypointRelativePos": 0.2,
       "command": {
         "type": "sequential",
         "data": {
@@ -67,7 +67,7 @@
   ],
   "globalConstraints": {
     "maxVelocity": 2.5,
-    "maxAcceleration": 2.0,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

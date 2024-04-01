@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6618658282361609,
-      "y": 6.6192074726491805
+      "x": 0.8352460341284319,
+      "y": 6.56743713487427
     },
-    "rotation": 59.81631934277764
+    "rotation": 56.76828893202078
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Amp Side SW + Cross"
+            "pathName": "Amp SW + N1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "PodiumShootNote"
           }
         }
       ]

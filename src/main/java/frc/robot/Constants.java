@@ -137,14 +137,14 @@ public final class Constants {
   public static final class ArmConstants {
     public static final IdleMode kArmMotorIdleMode = IdleMode.kBrake;
     public static final int kArmMotorCurrentLimit = 50; // amps
-    public static final double kArmMax = 135.0; // MAX position - do not change
+    public static final double kArmMax = 137.0; // MAX position - do not change
     public static final double kArmMin = 35.0; // MIN position - do not change
     public static final double kArmIntakePosition = 52.5; // Intake position
     public static final double kArmWingPosition = 55.0;
     public static final double kArmPodiumPosition = 62.5;
     public static final double kArmSubwooferPosition = 81.0;
     public static final double kArmSourcePosition = 70.0;
-    public static final double kArmAmpPosition = 72.0;
+    public static final double kArmAmpPosition = 136.0; //Full reverse
     public static final double kArmTolerance = 3; // Position tolerance for auto commands
   }
 
@@ -167,7 +167,7 @@ public final class Constants {
     public static final double kLauncherSubwooferSpeed = 0.58;
     public static final double kLauncherPodiumSpeed = 0.65;
     public static final double kLauncherWingSpeed = 0.75;
-    public static final double kLauncherAmpSpeed = 0.185;
+    public static final double kLauncherAmpSpeed = 0.125;  //pooting speed
     public static final double kLauncherSourceSpeed = -0.35;
   }
 

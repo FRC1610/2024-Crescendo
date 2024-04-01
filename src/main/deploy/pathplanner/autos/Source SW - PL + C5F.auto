@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.81,
+      "y": 4.45
+    },
+    "rotation": -56.564428750362346
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Source SW + C5"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "PodiumShootNote"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Misc",
+  "choreoAuto": false
+}

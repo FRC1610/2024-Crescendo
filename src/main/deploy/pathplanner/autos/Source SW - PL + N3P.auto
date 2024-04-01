@@ -1,0 +1,37 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7792735585471171,
+      "y": 4.41249682499365
+    },
+    "rotation": -57.99461679191649
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Source SW + N3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "PodiumShootNote"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Source Side",
+  "choreoAuto": false
+}

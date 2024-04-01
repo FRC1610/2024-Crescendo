@@ -20,13 +20,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Center PL + N2"
+            "pathName": "Center SW + N2 + SW"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ArmDown"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Center SW + C3"
           }
         }
       ]

@@ -1,0 +1,31 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.6618658282361609,
+      "y": 6.6192074726491805
+    },
+    "rotation": 59.81631934277764
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Amp SW + Cross"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Amp Side",
+  "choreoAuto": false
+}

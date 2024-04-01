@@ -8,8 +8,8 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RuntimeType;
+//import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.RuntimeType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -31,22 +31,22 @@ import frc.robot.subsystems.Indexer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
+//import edu.wpi.first.wpilibj2.command.PrintCommand;
+//import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+//import edu.wpi.first.wpilibj2.command.WaitCommand;
+//import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+//import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.GoalEndState;
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
+//import com.pathplanner.lib.commands.PathPlannerAuto;
+//import com.pathplanner.lib.path.GoalEndState;
+//import com.pathplanner.lib.path.PathConstraints;
+//import com.pathplanner.lib.path.PathPlannerPath;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -78,13 +78,14 @@ public class RobotContainer {
     double tx = LimelightHelpers.getTX("");
 
     // NAMED COMMANDS
-    NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
+    //NamedCommands.registerCommand("SubwooferPosition", SubwooferCommandGroup());
     NamedCommands.registerCommand("SubShootNote", AutoSubShootCommand());
     NamedCommands.registerCommand("PodiumShootNote", AutoPodiumShootCommand());
-    NamedCommands.registerCommand("Shoot:", m_Indexer.RunIndexerCommand(.5).withTimeout(0.25));
-    NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
-    NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
+    //NamedCommands.registerCommand("Shoot:", m_Indexer.RunIndexerCommand(.5).withTimeout(0.25));
+    //NamedCommands.registerCommand("StopIndexer", m_Indexer.StopIndexerCommand());
+    //NamedCommands.registerCommand("StopLauncher", m_Launcher.StopLauncherCommand());
     NamedCommands.registerCommand("IntakeNote", IntakeCommandGroup());
+    NamedCommands.registerCommand("ArmDown", m_Arm.SetPositionCommand(ArmConstants.kArmMin).withTimeout(0.5));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -148,29 +149,11 @@ public class RobotContainer {
 
     // Intake REVERSE
     new JoystickButton(m_OperatorController, Button.kLeftBumper.value) // USB 1 Left Bumper
-        .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 75% power while button held (adjust
-                                                      // intake speed here)
-
-    // Launcher SUBWOOFER Speed
-    // new JoystickButton(m_OperatorController, Button.kA.value) // USB 1 - Button A
-    // .whileTrue(m_Launcher.RunLauncherCommand(0.60, 0.60)); // Run launcher at 60%
-    // power while button held (adjust launcher speed here)
-
-    // Launcher WING Speed
-    // new JoystickButton(m_OperatorController, Button.kB.value) // USB 1 - Button B
-    // .whileTrue((m_Launcher.RunLauncherCommand(0.70, 0.70))); // Run launcher at
-    // 70% power while button held (adjust launcher speed here)
-
-    // Launcher AMP Speed
-    // new JoystickButton(m_OperatorController, Button.kY.value) // USB 1 - Button Y
-    // .whileTrue((m_Launcher.RunLauncherCommand(0.15, 0.15))); // Run launcher at
-    // 60% power while button held (adjust launcher speed here)
+        .whileTrue(m_Intake.RunIntakeCommand(-0.75)); // Run intake motor REVERSE at 75% power while button held (adjust intake speed here)
 
     // Run Indexer
     new JoystickButton(m_driverController, Button.kRightBumper.value) // USB 0 - Right Bumper
-        .whileTrue(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)); // Run indexer at 50% power while
-                                                                                 // button held (adjust indexer speed
-                                                                                 // here)
+        .whileTrue(m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)); // Run indexer while button held
 
     // Arm Wing Position
     // new JoystickButton(m_driverController, XboxController.Button.kX.value) // USB
@@ -191,10 +174,6 @@ public class RobotContainer {
     //new JoystickButton(m_driverController, Button.kLeftBumper.value)
     //    .whileTrue(m_Climber.RunClimberCommand(0.25, 0.25))
     //    .whileFalse(m_Climber.StopClimberCommand());
-
-    // new RunCommand(() ->
-    // m_Climber.RunClimberCommand(m_OperatorController.getLeftY(),
-    // m_OperatorController.getRightY()));
 
     // Intake Position and Run Intake
     new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value) // USB 1 - Button Right Bumper
@@ -264,7 +243,7 @@ public class RobotContainer {
   // Puts arm in intake position, runs intake, runs Indexer until Note detected
   public Command IntakeCommandGroup() {
     return new ParallelCommandGroup(
-        m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote).andThen(RumbleCommand(IndexerConstants.kIndexerRumbleSpeed).withTimeout(0.5) ),
+        m_Intake.RunIntakeCommand(IntakeConstants.kIntakeSpeed).until(m_Indexer::hasNote).andThen(RumbleCommand(IndexerConstants.kIndexerRumbleSpeed).withTimeout(0.75) ),
         m_Indexer.IntakeNoteCommand(),
         m_Arm.SetPositionCommand(ArmConstants.kArmIntakePosition));
   }
@@ -308,27 +287,32 @@ public class RobotContainer {
 
   // AUTONOMOUS COMMANDS
 
-  // Puts arm in Subwoofer position and runs flywheels in parallel, then runs
-  // Indexer after timeout
+  // Puts arm in Subwoofer position and runs flywheels in parallel, then runs Indexer after timeout
   public Command AutoSubShootCommand() {
     return new SequentialCommandGroup(
         new ParallelCommandGroup(
-            m_Launcher.RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed).withTimeout(AutoCommandConstants.kAutoSubwooferTimeout),
-            m_Arm.SetPositionCommand(ArmConstants.kArmSubwooferPosition).until(m_Arm::armAtSetpoint)),
-        m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)
+            m_Launcher
+            .RunLauncherCommand(LauncherConstants.kLauncherSubwooferSpeed, LauncherConstants.kLauncherSubwooferSpeed)
+            .withTimeout(AutoCommandConstants.kAutoSubwooferTimeout),
+            m_Arm
+            .SetPositionCommand(ArmConstants.kArmSubwooferPosition)
+            .until(m_Arm::armAtSetpoint)),
+        m_Indexer
+            .RunIndexerCommand(IndexerConstants.kIndexerSpeed)
             .withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
 
-  // Puts arm in Podium position and runs flywheels in parallel, then runs Indexer
-  // after timeout
+  // Puts arm in Podium position and runs flywheels in parallel, then runs Indexer after timeout
   public Command AutoPodiumShootCommand() {
     return new SequentialCommandGroup(
-        new ParallelCommandGroup(
-            m_Launcher
-                .RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed)
-                .withTimeout(AutoCommandConstants.kAutoPodiumTimeout),
-            m_Arm.SetPositionCommand(ArmConstants.kArmPodiumPosition).until(m_Arm::armAtSetpoint)),
-        m_Indexer.RunIndexerCommand(IndexerConstants.kIndexerSpeed)
+        m_Arm
+            .SetPositionCommand(ArmConstants.kArmPodiumPosition)
+            .until(m_Arm::armAtSetpoint),
+        m_Launcher
+            .RunLauncherCommand(LauncherConstants.kLauncherPodiumSpeed, LauncherConstants.kLauncherPodiumSpeed)
+            .withTimeout(AutoCommandConstants.kAutoPodiumTimeout),
+        m_Indexer
+            .RunIndexerCommand(IndexerConstants.kIndexerSpeed)
             .withTimeout(AutoCommandConstants.kAutoIndexerTimeout));
   }
 

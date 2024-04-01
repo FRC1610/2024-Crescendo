@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.717334047280707,
-      "y": 4.5114151489564245
+      "x": 0.8352460341284319,
+      "y": 6.56743713487427
     },
-    "rotation": -57.99461679191649
+    "rotation": 56.76828893202078
   },
   "command": {
     "type": "sequential",
@@ -20,7 +20,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Source SW + N3"
+            "pathName": "Amp SW + N1 + SW"
           }
         },
         {
@@ -32,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Source SW + C5"
+            "pathName": "Amp SW + C1 + SW"
           }
         },
         {
@@ -44,6 +44,6 @@
       ]
     }
   },
-  "folder": "Source Side",
+  "folder": "Amp Side",
   "choreoAuto": false
 }

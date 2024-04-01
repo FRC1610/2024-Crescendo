@@ -3,41 +3,57 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.8352460341284319,
+        "x": 0.919204747500404,
         "y": 6.56743713487427
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.2363821091278546,
-        "y": 6.9872307017341315
+        "x": 1.373647942101079,
+        "y": 6.992561413694256
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.887570138776641,
-        "y": 6.99655944766435
+        "x": 6.3750923898244185,
+        "y": 7.284826101183734
       },
       "prevControl": {
-        "x": 2.3558316207576593,
-        "y": 6.996559447664634
+        "x": 6.183104740582202,
+        "y": 7.284826101183734
       },
       "nextControl": {
-        "x": 3.141339464083363,
-        "y": 6.996559447664214
+        "x": 6.567080039066632,
+        "y": 7.284826101183734
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.8352460341284319,
+        "x": 8.279501243687172,
+        "y": 7.451230758317373
+      },
+      "prevControl": {
+        "x": 9.59002508075495,
+        "y": 7.553615845970431
+      },
+      "nextControl": {
+        "x": 6.968977406619391,
+        "y": 7.348845670664315
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.919204747500404,
         "y": 6.56743713487427
       },
       "prevControl": {
-        "x": 1.3949707899415797,
-        "y": 7.239106841850047
+        "x": 1.3589884842107347,
+        "y": 6.977901955803912
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,7 +63,12 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.1,
-      "rotationDegrees": -0.6743711192478672,
+      "rotationDegrees": 0.4416685933519133,
+      "rotateFast": false
+    },
+    {
+      "waypointRelativePos": 2,
+      "rotationDegrees": 0,
       "rotateFast": false
     }
   ],
@@ -55,7 +76,7 @@
   "eventMarkers": [
     {
       "name": "Intake Note",
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {
@@ -72,20 +93,20 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 1.5,
-    "maxAcceleration": 1.5,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 58.32453126189073,
+    "rotation": 56.309932474020236,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "Amp Side",
   "previewStartingState": {
-    "rotation": 59.74356283647079,
+    "rotation": 50.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

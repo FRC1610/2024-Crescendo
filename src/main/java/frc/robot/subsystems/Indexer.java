@@ -6,16 +6,15 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 //import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.DriverStation.Alliance;
-//import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IndexerConstants;
-import frc.robot.subsystems.BlinkinLEDController.BlinkinPattern;
 
 public class Indexer extends SubsystemBase {
     private final CANSparkMax m_IndexerMotor;
-    //private final Spark m_Blinkin;
+    private final Spark m_Blinkin;
 
     //private final DigitalInput m_IndexSensorRear = new DigitalInput(IndexerConstants.kIndexerSensorRearDIOPort);
     public final DigitalInput m_IndexSensorFront = new DigitalInput(IndexerConstants.kIndexerSensorFrontDIOPort);
@@ -30,7 +29,7 @@ public class Indexer extends SubsystemBase {
         //m_IndexerMotor.burnFlash();
 
         // Blinkin Setup
-        //m_Blinkin = new Spark(0);
+        m_Blinkin = new Spark(0);
         //var Alliance = DriverStation.getAlliance();
     }
 
@@ -78,12 +77,12 @@ public void periodic() {
 
     if(!m_IndexSensorFront.get()) {
         noteState = "LOADED";
-        BlinkinLEDController.setPattern(BlinkinPattern.STROBE_GOLD);
-        //m_Blinkin.set(-0.07); //Strobe Gold
+        //BlinkinLEDController.setPattern(BlinkinPattern.STROBE_GOLD);
+        m_Blinkin.set(-0.07); //Strobe Gold
     } else {
         noteState = "EMPTY";
-        BlinkinLEDController.setAllianceColorChase();
-        //m_Blinkin.set(0.01); //Color 1 Chase
+        //BlinkinLEDController.setAllianceColorChase();
+        m_Blinkin.set(-0.01); //Color 1 Chase
     }
     SmartDashboard.putString("Note Indexed", noteState);
 }

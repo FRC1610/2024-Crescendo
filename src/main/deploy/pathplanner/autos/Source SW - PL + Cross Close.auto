@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7660996211853839,
-      "y": 4.442455916275801
+      "x": 0.7962610235942573,
+      "y": 4.358003989530955
     },
-    "rotation": -57.99461679191649
+    "rotation": -58.781597235653656
   },
   "command": {
     "type": "sequential",
@@ -18,15 +18,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Source SW + C5 + SW"
+            "waitTime": 6.0
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "SubShootNote"
+            "pathName": "Source SW + Cross Close"
           }
         }
       ]

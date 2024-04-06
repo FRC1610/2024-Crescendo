@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3856420440113608,
-      "y": 5.550603828480384
+      "x": 0.8143578650395813,
+      "y": 6.69852881645953
     },
-    "rotation": 0
+    "rotation": 59.50016676655258
   },
   "command": {
     "type": "sequential",
@@ -18,20 +18,20 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Center SW + Cross"
+            "waitTime": 12.0
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "SubShootNote"
+            "pathName": "Amp SW + Cross Close"
           }
         }
       ]
     }
   },
-  "folder": "Center",
+  "folder": "Amp Side",
   "choreoAuto": false
 }

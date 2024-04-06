@@ -27,7 +27,7 @@ public final class Constants {
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
-    public static final double kMaxSpeedMetersPerSecond = 5.0; // 4.8 theoretical max on High gearing.
+    public static final double kMaxSpeedMetersPerSecond = 5.25; // 4.8 theoretical max on High gearing.
                                                               //Upgraded to 5.5 for testing, max for Extra High 4 is 6.04m/sec
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
@@ -166,7 +166,7 @@ public final class Constants {
     public static final double kLauncherRampRate = 0.5; // seconds
     public static final double kLauncherSubwooferSpeed = 0.58;
     public static final double kLauncherPodiumSpeed = 0.65;
-    public static final double kLauncherWingSpeed = 0.75;
+    public static final double kLauncherWingSpeed = 0.60;
     public static final double kLauncherAmpSpeed = 0.125;  //pooting speed
     public static final double kLauncherSourceSpeed = -0.35;
   }

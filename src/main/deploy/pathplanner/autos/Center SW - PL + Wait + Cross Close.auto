@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.290505644074351,
-      "y": 5.537577201280529
+      "x": 1.3856420440113608,
+      "y": 5.550603828480384
     },
     "rotation": 0
   },
@@ -18,27 +18,15 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 10.0
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Center SW + Cross"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SubShootNote"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ArmDown"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Center SW + C3"
           }
         }
       ]

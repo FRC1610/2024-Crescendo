@@ -1,0 +1,25 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.8143578650395813,
+      "y": 6.69852881645953
+    },
+    "rotation": 59.50016676655258
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "SubShootNote"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Amp Side",
+  "choreoAuto": false
+}

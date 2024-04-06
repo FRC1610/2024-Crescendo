@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7660996211853839,
-      "y": 4.442455916275801
+      "x": 0.8143578650395813,
+      "y": 6.69852881645953
     },
-    "rotation": -57.99461679191649
+    "rotation": 59.50016676655258
   },
   "command": {
     "type": "sequential",
@@ -18,20 +18,20 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Source SW + C5 + SW"
+            "waitTime": 12.0
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "SubShootNote"
+            "pathName": "Amp SW + Cross Close"
           }
         }
       ]
     }
   },
-  "folder": "Source Side",
+  "folder": "Amp Side",
   "choreoAuto": false
 }

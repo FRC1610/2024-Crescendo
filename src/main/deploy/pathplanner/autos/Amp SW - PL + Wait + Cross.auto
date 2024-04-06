@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.6618658282361609,
-      "y": 6.6192074726491805
+      "x": 0.8022933040760319,
+      "y": 6.68646425549598
     },
     "rotation": 59.81631934277764
   },
@@ -15,6 +15,12 @@
           "type": "named",
           "data": {
             "name": "SubShootNote"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 8.0
           }
         },
         {
